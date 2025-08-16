@@ -31,18 +31,18 @@ function M.setup(palette, options)
   -- Syntax highlighting
   highlights.Comment = vim.tbl_extend("force", { fg = palette.comment }, styles.comments)
   highlights.Constant = { fg = palette.bright_red }
-  highlights.String = { fg = palette.green }
+  highlights.String = { fg = palette.bright_green }  -- Match Ghostty green strings
   highlights.Character = { fg = palette.bright_green }
-  highlights.Number = { fg = palette.bright_red }
+  highlights.Number = { fg = palette.bright_blue }  -- Match Ghostty blue numbers
   highlights.Boolean = { fg = palette.bright_red }
-  highlights.Float = { fg = palette.bright_red }
-  highlights.Identifier = vim.tbl_extend("force", { fg = palette.blue }, styles.variables)
-  highlights.Function = vim.tbl_extend("force", { fg = palette.bright_blue }, styles.functions)
+  highlights.Float = { fg = palette.bright_blue }  -- Match Ghostty blue numbers
+  highlights.Identifier = vim.tbl_extend("force", { fg = palette.fg }, styles.variables)  -- White variables
+  highlights.Function = vim.tbl_extend("force", { fg = palette.bright_yellow }, styles.functions)  -- Yellow functions
   highlights.Statement = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
   highlights.Conditional = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
   highlights.Repeat = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
   highlights.Label = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
-  highlights.Operator = { fg = palette.cyan }
+  highlights.Operator = { fg = palette.bright_cyan }  -- Match Ghostty cyan operators
   highlights.Keyword = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
   highlights.Exception = vim.tbl_extend("force", { fg = palette.red }, styles.keywords)
   highlights.PreProc = { fg = palette.yellow }
@@ -50,7 +50,7 @@ function M.setup(palette, options)
   highlights.Define = { fg = palette.magenta }
   highlights.Macro = { fg = palette.yellow }
   highlights.PreCondit = { fg = palette.yellow }
-  highlights.Type = { fg = palette.yellow }
+  highlights.Type = { fg = palette.bright_cyan }  -- Match Ghostty cyan types
   highlights.StorageClass = { fg = palette.yellow }
   highlights.Structure = { fg = palette.yellow }
   highlights.Typedef = { fg = palette.yellow }
@@ -75,30 +75,30 @@ function M.setup(palette, options)
   highlights["@constant.macro"] = { fg = palette.yellow }
   highlights["@module"] = { fg = palette.yellow }
   highlights["@label"] = highlights.Label
-  highlights["@string"] = highlights.String
+  highlights["@string"] = { fg = palette.bright_green }  -- Match Ghostty green strings
   highlights["@string.escape"] = { fg = palette.cyan }
   highlights["@string.special"] = { fg = palette.cyan }
   highlights["@character"] = highlights.Character
-  highlights["@number"] = highlights.Number
+  highlights["@number"] = { fg = palette.bright_blue }  -- Match Ghostty blue numbers
   highlights["@boolean"] = highlights.Boolean
-  highlights["@float"] = highlights.Float
-  highlights["@function"] = highlights.Function
-  highlights["@function.builtin"] = { fg = palette.cyan }
-  highlights["@function.macro"] = { fg = palette.yellow }
-  highlights["@function.method"] = highlights.Function
-  highlights["@constructor"] = { fg = palette.yellow }
-  highlights["@operator"] = highlights.Operator
+  highlights["@float"] = { fg = palette.bright_blue }  -- Match Ghostty blue numbers
+  highlights["@function"] = { fg = palette.bright_yellow }  -- Match Ghostty yellow functions
+  highlights["@function.builtin"] = { fg = palette.bright_yellow }
+  highlights["@function.macro"] = { fg = palette.bright_yellow }
+  highlights["@function.method"] = { fg = palette.bright_yellow }
+  highlights["@constructor"] = { fg = palette.bright_yellow }
+  highlights["@operator"] = { fg = palette.bright_cyan }  -- Match Ghostty cyan operators
   highlights["@keyword"] = highlights.Keyword
-  highlights["@keyword.function"] = { fg = palette.magenta }
-  highlights["@keyword.operator"] = { fg = palette.magenta }
+  highlights["@keyword.function"] = { fg = palette.bright_blue }  -- `fn` in bright blue
+  highlights["@keyword.operator"] = { fg = palette.magenta }  -- `pub` stays magenta
   highlights["@keyword.return"] = { fg = palette.magenta }
-  highlights["@keyword.conditional"] = { fg = palette.magenta }
-  highlights["@keyword.repeat"] = { fg = palette.magenta }
+  highlights["@keyword.conditional"] = { fg = palette.magenta }  -- `if`, `else`
+  highlights["@keyword.repeat"] = { fg = palette.magenta }  -- `while`
   highlights["@keyword.import"] = { fg = palette.magenta }
-  highlights["@keyword.exception"] = { fg = palette.red }
-  highlights["@type"] = highlights.Type
-  highlights["@type.builtin"] = { fg = palette.red }
-  highlights["@type.definition"] = { fg = palette.yellow }
+  highlights["@keyword.exception"] = { fg = palette.magenta }  -- `try`
+  highlights["@type"] = { fg = palette.bright_cyan }  -- Match Ghostty cyan types
+  highlights["@type.builtin"] = { fg = palette.bright_cyan }  -- usize, void, etc.
+  highlights["@type.definition"] = { fg = palette.bright_cyan }
   highlights["@attribute"] = { fg = palette.cyan }
   highlights["@property"] = { fg = palette.blue }
   highlights["@comment"] = highlights.Comment

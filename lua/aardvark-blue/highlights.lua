@@ -113,6 +113,18 @@ function M.setup(palette, options)
   highlights["@tag.attribute"] = { fg = palette.yellow }
   highlights["@tag.delimiter"] = { fg = palette.white }
 
+  -- TypeScript specific highlights
+  highlights["@keyword.modifier"] = { fg = palette.yellow }     -- public, private, protected, readonly
+  highlights["@keyword.type"] = { fg = palette.magenta }        -- interface, type, enum, namespace  
+  highlights["@keyword.operator"] = { fg = palette.cyan }       -- keyof, satisfies, as, is
+  highlights["@attribute"] = { fg = palette.cyan }              -- @Component, @Injectable decorators
+  
+  -- JSX/TSX specific highlights (override general @tag for JSX)
+  highlights["@tag.tsx"] = { fg = palette.bright_blue }         -- React Components in TSX
+  highlights["@tag.builtin.tsx"] = { fg = palette.blue }        -- HTML tags in TSX
+  highlights["@tag.attribute.tsx"] = { fg = palette.yellow }    -- JSX attributes
+  highlights["@tag.delimiter.tsx"] = { fg = palette.white }     -- JSX tag delimiters
+
   -- LSP highlights
   highlights.LspReferenceText = { bg = palette.bg_light }
   highlights.LspReferenceRead = { bg = palette.bg_light }

@@ -1,0 +1,132 @@
+*aardvark-blue.txt*          A beautiful blue colorscheme for Neovim
+
+==============================================================================
+CONTENTS                                                *aardvark-blue-contents*
+
+1. Introduction                                    |aardvark-blue-introduction|
+2. Installation                                    |aardvark-blue-installation|
+3. Configuration                                  |aardvark-blue-configuration|
+4. Commands                                            |aardvark-blue-commands|
+5. Functions                                          |aardvark-blue-functions|
+6. License                                              |aardvark-blue-license|
+
+==============================================================================
+1. INTRODUCTION                                    *aardvark-blue-introduction*
+
+aardvark-blue.nvim is a modern Neovim colorscheme inspired by the Aardvark 
+Blue terminal theme. It features a deep blue background with carefully 
+balanced syntax highlighting for optimal readability and reduced eye strain.
+
+Features:
+- Beautiful deep blue color palette
+- Full TreeSitter support
+- LSP integration
+- Customizable options
+- Terminal color support
+
+==============================================================================
+2. INSTALLATION                                    *aardvark-blue-installation*
+
+Using lazy.nvim: >
+    {
+      "sehyunchung/aardvark-blue.nvim",
+      priority = 1000,
+      config = function()
+        vim.cmd.colorscheme("aardvark-blue")
+      end,
+    }
+<
+
+Using packer.nvim: >
+    use {
+      "sehyunchung/aardvark-blue.nvim",
+      config = function()
+        vim.cmd.colorscheme("aardvark-blue")
+      end,
+    }
+<
+
+Manual installation:
+1. Clone the repository to your Neovim configuration directory
+2. Add the colorscheme to your init.lua: >
+    vim.cmd.colorscheme("aardvark-blue")
+<
+
+==============================================================================
+3. CONFIGURATION                                  *aardvark-blue-configuration*
+
+Configure the colorscheme before setting it: >
+    require("aardvark-blue").setup({
+      transparent = false,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { bold = true },
+        functions = {},
+        variables = {},
+      },
+      on_highlights = function(highlights, colors)
+        -- Custom highlight overrides
+      end,
+    })
+    
+    vim.cmd.colorscheme("aardvark-blue")
+<
+
+Configuration options:
+
+`transparent`                                     *aardvark-blue-transparent*
+    Type: boolean
+    Default: false
+    
+    Enable transparent background.
+
+`terminal_colors`                             *aardvark-blue-terminal_colors*
+    Type: boolean
+    Default: true
+    
+    Set terminal colors to match the theme.
+
+`styles`                                             *aardvark-blue-styles*
+    Type: table
+    Default: see below
+    
+    Customize text styles for different syntax elements:
+    - comments: Style for comments
+    - keywords: Style for keywords
+    - functions: Style for functions
+    - variables: Style for variables
+    
+    Each style can contain: `bold`, `italic`, `underline`
+
+`on_highlights`                                 *aardvark-blue-on_highlights*
+    Type: function
+    Default: nil
+    
+    Function to override or extend highlight groups.
+    Receives (highlights, colors) as parameters.
+
+==============================================================================
+4. COMMANDS                                            *aardvark-blue-commands*
+
+`:colorscheme aardvark-blue`                          *:colorscheme-aardvark-blue*
+    Set the colorscheme to aardvark-blue.
+
+==============================================================================
+5. FUNCTIONS                                          *aardvark-blue-functions*
+
+`require("aardvark-blue").setup({config})`              *aardvark-blue.setup()*
+    Configure the colorscheme with the given options.
+    
+    Parameters:
+        {config} (table): Configuration options
+
+`require("aardvark-blue").load()`                        *aardvark-blue.load()*
+    Load the colorscheme. Called automatically when using `:colorscheme`.
+
+==============================================================================
+6. LICENSE                                              *aardvark-blue-license*
+
+MIT License
+
+vim:tw=78:ts=8:ft=help:norl:

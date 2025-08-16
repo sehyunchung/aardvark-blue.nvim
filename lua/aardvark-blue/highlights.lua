@@ -1,12 +1,20 @@
 local M = {}
 
-function M.setup(palette, config)
+function M.setup(palette, options)
   local highlights = {}
+  
+  -- Ensure styles exist with defaults
+  local styles = options.styles or {
+    comments = {},
+    keywords = {},
+    functions = {},
+    variables = {},
+  }
 
   -- Editor highlights
-  highlights.Normal = { fg = palette.fg, bg = config.transparent and palette.none or palette.bg }
+  highlights.Normal = { fg = palette.fg, bg = options.transparent and palette.none or palette.bg }
   highlights.NormalFloat = { fg = palette.fg, bg = palette.bg_dark }
-  highlights.NormalNC = { fg = palette.fg, bg = config.transparent and palette.none or palette.bg }
+  highlights.NormalNC = { fg = palette.fg, bg = options.transparent and palette.none or palette.bg }
   highlights.LineNr = { fg = palette.line_number }
   highlights.CursorLine = { bg = palette.cursor_line }
   highlights.CursorLineNr = { fg = palette.bright_blue, bold = true }
@@ -21,22 +29,22 @@ function M.setup(palette, config)
   highlights.MatchParen = { fg = palette.bright_cyan, bold = true }
 
   -- Syntax highlighting
-  highlights.Comment = vim.tbl_extend("force", { fg = palette.comment }, config.styles.comments)
+  highlights.Comment = vim.tbl_extend("force", { fg = palette.comment }, styles.comments)
   highlights.Constant = { fg = palette.bright_red }
   highlights.String = { fg = palette.green }
   highlights.Character = { fg = palette.bright_green }
   highlights.Number = { fg = palette.bright_red }
   highlights.Boolean = { fg = palette.bright_red }
   highlights.Float = { fg = palette.bright_red }
-  highlights.Identifier = vim.tbl_extend("force", { fg = palette.blue }, config.styles.variables)
-  highlights.Function = vim.tbl_extend("force", { fg = palette.bright_blue }, config.styles.functions)
-  highlights.Statement = vim.tbl_extend("force", { fg = palette.magenta }, config.styles.keywords)
-  highlights.Conditional = vim.tbl_extend("force", { fg = palette.magenta }, config.styles.keywords)
-  highlights.Repeat = vim.tbl_extend("force", { fg = palette.magenta }, config.styles.keywords)
-  highlights.Label = vim.tbl_extend("force", { fg = palette.magenta }, config.styles.keywords)
+  highlights.Identifier = vim.tbl_extend("force", { fg = palette.blue }, styles.variables)
+  highlights.Function = vim.tbl_extend("force", { fg = palette.bright_blue }, styles.functions)
+  highlights.Statement = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
+  highlights.Conditional = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
+  highlights.Repeat = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
+  highlights.Label = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
   highlights.Operator = { fg = palette.cyan }
-  highlights.Keyword = vim.tbl_extend("force", { fg = palette.magenta }, config.styles.keywords)
-  highlights.Exception = vim.tbl_extend("force", { fg = palette.red }, config.styles.keywords)
+  highlights.Keyword = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
+  highlights.Exception = vim.tbl_extend("force", { fg = palette.red }, styles.keywords)
   highlights.PreProc = { fg = palette.yellow }
   highlights.Include = { fg = palette.magenta }
   highlights.Define = { fg = palette.magenta }
@@ -136,7 +144,7 @@ function M.setup(palette, config)
   highlights.VertSplit = { fg = palette.border }
   highlights.Folded = { fg = palette.comment, bg = palette.fold }
   highlights.FoldColumn = { fg = palette.comment }
-  highlights.SignColumn = { fg = palette.fg, bg = config.transparent and palette.none or palette.bg }
+  highlights.SignColumn = { fg = palette.fg, bg = options.transparent and palette.none or palette.bg }
   highlights.Directory = { fg = palette.blue }
   highlights.Title = { fg = palette.bright_blue, bold = true }
   highlights.ErrorMsg = { fg = palette.error }
@@ -146,7 +154,7 @@ function M.setup(palette, config)
   highlights.ModeMsg = { fg = palette.cyan }
 
   -- Terminal colors
-  if config.terminal_colors then
+  if options.terminal_colors then
     vim.g.terminal_color_0 = palette.black
     vim.g.terminal_color_1 = palette.red
     vim.g.terminal_color_2 = palette.green

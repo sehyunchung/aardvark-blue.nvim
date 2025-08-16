@@ -14,6 +14,11 @@ function M.load()
     return
   end
 
+  -- Ensure config is initialized with defaults
+  if not config.options then
+    config.setup({})
+  end
+
   -- Reset highlighting
   vim.cmd("hi clear")
   if vim.fn.exists("syntax_on") then

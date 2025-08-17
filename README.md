@@ -1,14 +1,16 @@
 # 🦫 aardvark-blue.nvim
 
-A modern Neovim colorscheme inspired by the Aardvark Blue terminal theme. Features a deep blue background with carefully balanced syntax highlighting for optimal readability and reduced eye strain.
+A modern Neovim colorscheme inspired by the Aardvark Blue terminal theme. Features a deep blue background with carefully balanced syntax highlighting for optimal readability and reduced eye strain. Enhanced with specialized TypeScript/React support and comprehensive TreeSitter integration.
 
 ## ✨ Features
 
 - 🎨 **Beautiful color palette** - Deep blue background (#102040) with vibrant accent colors
-- 🌳 **TreeSitter support** - Full semantic highlighting for modern syntax
-- 🔧 **LSP integration** - Diagnostic and reference highlighting
+- 🌳 **Enhanced TreeSitter support** - Full semantic highlighting for modern syntax
+- 💙 **TypeScript & React optimized** - Specialized highlighting for TS/TSX/JSX with component distinction
+- 🔧 **LSP integration** - Diagnostic and reference highlighting with semantic tokens
 - ⚙️ **Customizable** - Configure transparency, styles, and terminal colors
 - 📦 **Plugin ready** - Easy installation with popular plugin managers
+- 🎯 **Language-aware** - Optimized syntax highlighting for multiple programming languages
 
 ## 🎨 Color Palette
 
@@ -23,6 +25,38 @@ A modern Neovim colorscheme inspired by the Aardvark Blue terminal theme. Featur
 | Blue | `#1370d3` / `#60a4ec` | Functions, info |
 | Magenta | `#c43ac3` / `#e26be2` | Keywords, statements |
 | Cyan | `#008eb0` / `#60b6cb` | Operators, hints |
+
+## 🚀 Language Support
+
+### Enhanced Support
+- **TypeScript/JavaScript** - Complete syntax highlighting with semantic tokens
+- **React (TSX/JSX)** - Component vs HTML tag distinction, prop highlighting
+- **Rust** - Keywords (`pub`, `fn`), types, and lifetime annotations
+- **Lua** - Neovim configuration optimized highlighting
+- **Python** - Modern syntax with decorator support
+- **Go** - Interfaces, structs, and method highlighting
+
+### Key Syntax Highlighting
+- **Keywords** (`if`, `else`, `while`, `pub`, `try`) → Magenta `#c43ac3`
+- **Functions** (`fn` keyword) → Bright Blue `#60a4ec`
+- **Function names** → Bright Yellow `#ffe763`
+- **Variables** → White `#dddddd`
+- **Strings** → Bright Green `#95dc55`
+- **Numbers** → Bright Blue `#60a4ec`
+- **Types** → Bright Cyan `#60b6cb`
+- **Comments** → Gray `#6a7a8a`
+
+### TypeScript Specific Features
+- **Modifiers** (`public`, `private`, `protected`, `readonly`) → Yellow
+- **Type keywords** (`interface`, `type`, `enum`, `namespace`) → Magenta
+- **Operators** (`keyof`, `satisfies`, `as`, `is`) → Cyan
+- **Decorators** (`@Component`, `@Injectable`) → Cyan
+
+### React/JSX Features
+- **React Components** → Bright Blue `#60a4ec`
+- **HTML Tags** → Blue `#1370d3`
+- **JSX Attributes** → Yellow `#ffe763`
+- **Tag Delimiters** → White `#dddddd`
 
 ## 📦 Installation
 
@@ -59,6 +93,40 @@ Then in your `init.vim` or `init.lua`:
 
 ```lua
 colorscheme aardvark-blue
+```
+
+## 🖼️ Preview
+
+The colorscheme provides distinct, readable syntax highlighting across all supported languages:
+
+```typescript
+// TypeScript example showcasing syntax highlighting
+interface User {
+  readonly id: number;        // readonly modifier in yellow
+  name: string;              // types in bright cyan
+  isActive: boolean;         // booleans in bright red
+}
+
+export class UserService {   // class/export keywords in magenta
+  private users: User[] = [];  // private modifier in yellow
+  
+  public async getUser(id: number): Promise<User | null> {
+    const user = this.users.find(u => u.id === id);  // functions in bright yellow
+    return user ?? null;     // operators in bright cyan
+  }
+}
+```
+
+```jsx
+// React TSX example showing component distinction
+const UserCard: React.FC<{user: User}> = ({user}) => {
+  return (
+    <div className="user-card">        {/* HTML tags in blue */}
+      <UserAvatar user={user} />       {/* React components in bright blue */}
+      <span>{user.name}</span>         {/* Strings in bright green */}
+    </div>
+  );
+};
 ```
 
 ## ⚙️ Configuration
@@ -117,16 +185,26 @@ vim.cmd.colorscheme("aardvark-blue")
 - Neovim 0.8+
 - True color support (`set termguicolors`)
 
-## 🎯 Supported Plugins
+## 🎯 Plugin & Tool Support
 
-The colorscheme includes highlight groups for popular Neovim plugins:
+### Core Integrations
+- **TreeSitter** - Full semantic highlighting with language-specific optimizations
+- **LSP** - Diagnostics, references, semantic tokens, and hover highlights
+- **Native Vim** - Complete fallback support for environments without TreeSitter
 
-- TreeSitter
-- LSP (diagnostics, references)
-- Telescope
-- nvim-tree
-- GitSigns
-- And many more...
+### Popular Plugin Support
+- **Telescope** - Beautiful fuzzy finder integration
+- **nvim-tree / neo-tree** - File explorer highlighting
+- **GitSigns** - Git diff and blame highlighting  
+- **Completion engines** - nvim-cmp, completion-nvim styling
+- **Status lines** - lualine, galaxyline compatible colors
+- **Terminal** - Full 16-color terminal palette support
+
+### Language Server Features
+- **Diagnostic highlighting** - Errors, warnings, info, hints with underlines
+- **Reference highlighting** - Symbol references and definitions
+- **Semantic tokens** - Enhanced syntax from language servers
+- **Hover highlights** - Documentation and signature help styling
 
 ## 🤝 Contributing
 

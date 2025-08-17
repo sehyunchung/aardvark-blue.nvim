@@ -45,6 +45,38 @@ aardvark-blue.nvim/
 - Numbers: Bright blue `#60a4ec`
 - Types: Bright cyan `#60b6cb`
 
+### TypeScript/TSX Specific Highlighting
+- **TypeScript Modifiers**: `public`, `private`, `protected`, `readonly` - Yellow `#dbba00`
+- **TypeScript Keywords**: `interface`, `type`, `enum`, `namespace` - Magenta `#c43ac3`
+- **TypeScript Operators**: `keyof`, `satisfies`, `as`, `is` - Cyan `#008eb0`
+- **Decorators**: `@Component`, `@Injectable` - Cyan `#008eb0`
+- **React Components**: JSX/TSX component tags - Bright blue `#60a4ec`
+- **HTML Tags in JSX**: Built-in HTML tags - Blue `#1370d3`
+- **JSX Attributes**: Component and HTML attributes - Yellow `#dbba00`
+- **JSX Delimiters**: Tag opening/closing brackets - White `#dddddd`
+
+### TreeSitter Group Implementation
+The colorscheme leverages specific TreeSitter capture groups for precise syntax highlighting:
+
+**Core Language Support:**
+- `@keyword.function` → Bright blue `#60a4ec` (for `fn` keyword)
+- `@keyword.operator` → Magenta `#c43ac3` (for `pub` keyword)
+- `@keyword.conditional` → Magenta `#c43ac3` (for `if`, `else`)
+- `@keyword.repeat` → Magenta `#c43ac3` (for `while`, `for`)
+- `@keyword.exception` → Magenta `#c43ac3` (for `try`, `catch`)
+
+**TypeScript Extensions:**
+- `@keyword.modifier` → Yellow `#dbba00` (for access modifiers)
+- `@keyword.type` → Magenta `#c43ac3` (for type declaration keywords)
+- `@keyword.operator` → Cyan `#008eb0` (for type operators)
+- `@attribute` → Cyan `#008eb0` (for decorators)
+
+**JSX/TSX Extensions:**
+- `@tag.tsx` → Bright blue `#60a4ec` (for React components)
+- `@tag.builtin.tsx` → Blue `#1370d3` (for HTML elements)
+- `@tag.attribute.tsx` → Yellow `#dbba00` (for JSX attributes)
+- `@tag.delimiter.tsx` → White `#bebebe` (for JSX brackets)
+
 ## Development Guidelines
 
 ### When Changing Colors
@@ -80,10 +112,12 @@ aardvark-blue.nvim/
 ```
 
 ### Color Verification
-1. Test various language files (Zig, Lua, JavaScript, etc.)
+1. Test various language files (Zig, Lua, JavaScript, TypeScript, TSX, etc.)
 2. Compare side-by-side with Ghostty terminal
 3. Verify both TreeSitter and default syntax highlighting
 4. Test LSP features (errors, warnings, references)
+5. Verify TypeScript-specific syntax (interfaces, generics, decorators)
+6. Test JSX/TSX component rendering and attribute highlighting
 
 ## Plugin Distribution
 
@@ -104,7 +138,8 @@ aardvark-blue.nvim/
 ## Future Plans
 
 - [ ] Add Cursor/VS Code theme (extras/cursor/)
-- [ ] Additional language-specific highlights
+- [x] TypeScript and JSX/TSX syntax highlighting support
+- [ ] Additional language-specific highlights (Go, Python, C++, etc.)
 - [ ] Consider light mode variant
 - [ ] Incorporate community feedback
 
@@ -112,5 +147,6 @@ aardvark-blue.nvim/
 
 1. Always compare changes with Ghostty original
 2. Consider both TreeSitter and default syntax highlighting
-3. Documentation updates are mandatory
-4. Specify reason for changes in commit messages
+3. Test TypeScript/TSX files to ensure language-specific highlights work correctly
+4. Documentation updates are mandatory
+5. Specify reason for changes in commit messages

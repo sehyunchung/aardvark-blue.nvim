@@ -46,6 +46,8 @@ The theme uses a carefully curated palette based on Ghostty's Aardvark Blue:
 4. Click Install
 5. Go to File > Preferences > Color Theme and select "Aardvark Blue"
 
+**Or install directly from the marketplace:** [Aardvark Blue Theme](https://marketplace.visualstudio.com/items?itemName=SehyunChung.aardvark-blue-theme)
+
 ### Manual Installation
 
 1. Download the `.vsix` file from the [releases page](https://github.com/sehyunchung/aardvark-blue.nvim/releases)

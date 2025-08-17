@@ -29,6 +29,7 @@ A modern Neovim colorscheme inspired by the Aardvark Blue terminal theme. Featur
 ## 🚀 Language Support
 
 ### Enhanced Support
+
 - **TypeScript/JavaScript** - Complete syntax highlighting with semantic tokens
 - **React (TSX/JSX)** - Component vs HTML tag distinction, prop highlighting
 - **Rust** - Keywords (`pub`, `fn`), types, and lifetime annotations
@@ -37,9 +38,10 @@ A modern Neovim colorscheme inspired by the Aardvark Blue terminal theme. Featur
 - **Go** - Interfaces, structs, and method highlighting
 
 ### Key Syntax Highlighting
+
 - **Keywords** (`if`, `else`, `while`, `pub`, `try`) → Magenta `#c43ac3`
 - **Functions** (`fn` keyword) → Bright Blue `#60a4ec`
-- **Function names** → Bright Yellow `#ffe763`
+- **Function names** → Yellow `#dbba00`
 - **Variables** → White `#dddddd`
 - **Strings** → Bright Green `#95dc55`
 - **Numbers** → Bright Blue `#60a4ec`
@@ -47,12 +49,14 @@ A modern Neovim colorscheme inspired by the Aardvark Blue terminal theme. Featur
 - **Comments** → Gray `#6a7a8a`
 
 ### TypeScript Specific Features
+
 - **Modifiers** (`public`, `private`, `protected`, `readonly`) → Yellow
 - **Type keywords** (`interface`, `type`, `enum`, `namespace`) → Magenta
 - **Operators** (`keyof`, `satisfies`, `as`, `is`) → Cyan
 - **Decorators** (`@Component`, `@Injectable`) → Cyan
 
 ### React/JSX Features
+
 - **React Components** → Bright Blue `#60a4ec`
 - **HTML Tags** → Blue `#1370d3`
 - **JSX Attributes** → Yellow `#ffe763`
@@ -111,7 +115,7 @@ export class UserService {   // class/export keywords in magenta
   private users: User[] = [];  // private modifier in yellow
   
   public async getUser(id: number): Promise<User | null> {
-    const user = this.users.find(u => u.id === id);  // functions in bright yellow
+    const user = this.users.find(u => u.id === id);  // functions in yellow
     return user ?? null;     // operators in bright cyan
   }
 }
@@ -188,11 +192,13 @@ vim.cmd.colorscheme("aardvark-blue")
 ## 🎯 Plugin & Tool Support
 
 ### Core Integrations
+
 - **TreeSitter** - Full semantic highlighting with language-specific optimizations
 - **LSP** - Diagnostics, references, semantic tokens, and hover highlights
 - **Native Vim** - Complete fallback support for environments without TreeSitter
 
 ### Popular Plugin Support
+
 - **Telescope** - Beautiful fuzzy finder integration
 - **nvim-tree / neo-tree** - File explorer highlighting
 - **GitSigns** - Git diff and blame highlighting  
@@ -201,6 +207,7 @@ vim.cmd.colorscheme("aardvark-blue")
 - **Terminal** - Full 16-color terminal palette support
 
 ### Language Server Features
+
 - **Diagnostic highlighting** - Errors, warnings, info, hints with underlines
 - **Reference highlighting** - Symbol references and definitions
 - **Semantic tokens** - Enhanced syntax from language servers

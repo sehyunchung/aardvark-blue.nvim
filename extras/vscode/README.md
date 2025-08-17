@@ -16,7 +16,7 @@ A deep blue color theme for Visual Studio Code inspired by Ghostty's Aardvark Bl
 The theme uses a carefully curated palette based on Ghostty's Aardvark Blue:
 
 - **Keywords** (`if`, `else`, `while`, `try`) → Magenta `#c43ac3`
-- **Functions** → Bright Yellow `#ffe763`
+- **Functions** → Yellow `#dbba00`
 - **Strings** → Bright Green `#95dc55`
 - **Numbers** → Bright Blue `#60a4ec`
 - **Types** → Bright Cyan `#60b6cb`
@@ -69,7 +69,7 @@ export class UserService {   // export/class keywords in magenta
   private users: User[] = [];  // private modifier in yellow
   
   public async getUser(id: number): Promise<User | null> {
-    const user = this.users.find(u => u.id === id);  // functions in bright yellow
+    const user = this.users.find(u => u.id === id);  // functions in yellow
     return user ?? null;     // operators in bright cyan
   }
 }

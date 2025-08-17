@@ -20,7 +20,7 @@ aardvark-blue.nvim/
 ├── doc/
 │   └── aardvark-blue.txt        # Vim help documentation
 └── extras/
-    └── vscode/                  # VS Code theme (v1.0.1)
+    └── vscode/                  # VS Code theme (vscode-v1.0.1)
 ```
 
 ## Core Components
@@ -136,7 +136,14 @@ The colorscheme leverages specific TreeSitter capture groups for precise syntax 
 
 ### GitHub Release Preparation
 
-1. Create version tags (v1.0.0, v1.1.0, etc.)
+**Versioning Scheme:**
+
+- Neovim plugin: `nvim-v1.0.0`, `nvim-v1.1.0`, etc.
+- VS Code theme: `vscode-v1.0.0`, `vscode-v1.1.0`, etc.
+
+**Release Process:**
+
+1. Create prefixed version tags for appropriate product
 2. Write release notes
 3. Add screenshots (README.md)
 4. Verify plugin manager compatibility
@@ -150,7 +157,7 @@ The colorscheme leverages specific TreeSitter capture groups for precise syntax 
 
 ## Future Plans
 
-- [x] Add VS Code theme (extras/vscode/) - **Completed v1.0.1**
+- [x] Add VS Code theme (extras/vscode/) - **Completed vscode-v1.0.1**
 - [x] TypeScript and JSX/TSX syntax highlighting support
 - [ ] Additional language-specific highlights (Go, Python, C++, etc.)
 - [ ] Consider light mode variant

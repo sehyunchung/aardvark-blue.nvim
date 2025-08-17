@@ -1,0 +1,29 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="128" height="128" fill="#102040" rx="16"/>
+  
+  <!-- Aardvark-inspired abstract design -->
+  <g transform="translate(64, 64)">
+    <!-- Body (ellipse) -->
+    <ellipse cx="0" cy="8" rx="28" ry="36" fill="#60a4ec" opacity="0.9"/>
+    
+    <!-- Head (circle) -->
+    <circle cx="0" cy="-20" r="20" fill="#60b6cb"/>
+    
+    <!-- Snout (elongated shape) -->
+    <ellipse cx="0" cy="-32" rx="8" ry="16" fill="#60b6cb"/>
+    
+    <!-- Ears -->
+    <ellipse cx="-12" cy="-35" rx="6" ry="14" fill="#c43ac3" transform="rotate(-20)"/>
+    <ellipse cx="12" cy="-35" rx="6" ry="14" fill="#c43ac3" transform="rotate(20)"/>
+    
+    <!-- Eyes -->
+    <circle cx="-6" cy="-22" r="2" fill="#dddddd"/>
+    <circle cx="6" cy="-22" r="2" fill="#dddddd"/>
+    
+    <!-- Accent elements (representing code/tech) -->
+    <rect x="-24" y="-8" width="3" height="3" fill="#ffe763" opacity="0.8"/>
+    <rect x="21" y="0" width="3" height="3" fill="#95dc55" opacity="0.8"/>
+    <rect x="-18" y="16" width="3" height="3" fill="#dbba00" opacity="0.8"/>
+  </g>
+</svg>

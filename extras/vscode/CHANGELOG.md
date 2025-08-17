@@ -28,6 +28,12 @@ All notable changes to the "Aardvark Blue Theme" extension will be documented in
 - **Terminal Integration**: ANSI colors matching the theme
 - **Complete UI**: All VS Code interface elements themed consistently
 
+## [1.0.2] - 2025-01-17
+
+### Fixed
+- Add missing icon reference in package.json for marketplace display
+- Icon should now appear correctly on VS Code Marketplace
+
 ## [1.0.1] - 2025-01-17
 
 ### Fixed

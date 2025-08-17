@@ -2,7 +2,7 @@
   "name": "aardvark-blue-theme",
   "displayName": "Aardvark Blue Theme",
   "description": "A deep blue color theme inspired by Ghostty's Aardvark Blue theme, optimized for TypeScript and modern web development",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "publisher": "SehyunChung",
   "author": {
     "name": "Sehyun Chung",
@@ -37,6 +37,7 @@
     "deep-blue",
     "syntax-highlighting"
   ],
+  "icon": "icon.png",
   "galleryBanner": {
     "color": "#102040",
     "theme": "dark"

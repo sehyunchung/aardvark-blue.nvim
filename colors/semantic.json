@@ -1,0 +1,66 @@
+{
+  "syntax": {
+    "comment": "ui.comment",
+    "string": "bright.green",
+    "number": "bright.blue", 
+    "boolean": "bright.red",
+    "keyword": "ansi.magenta",
+    "keyword_function": "bright.blue",
+    "keyword_operator": "ansi.magenta",
+    "keyword_typescript": "ansi.cyan",
+    "function": "bright.yellow",
+    "variable": "base.fg",
+    "type": "bright.cyan",
+    "operator": "bright.cyan",
+    "delimiter": "ansi.white",
+    "bracket": "ansi.white",
+    "error": "ui.error",
+    "warning": "ui.warning",
+    "info": "ui.info",
+    "hint": "ui.hint"
+  },
+  
+  "typescript": {
+    "modifier": "ansi.yellow",
+    "type_keyword": "ansi.magenta", 
+    "type_operator": "ansi.cyan",
+    "decorator": "ansi.cyan"
+  },
+  
+  "jsx": {
+    "component": "bright.blue",
+    "html_tag": "ansi.blue", 
+    "attribute": "bright.yellow",
+    "delimiter": "ansi.white",
+    "member_component": "bright.blue"
+  },
+  
+  "editor": {
+    "background": "base.bg",
+    "foreground": "base.fg",
+    "cursor": "base.cursor",
+    "selection": "base.selection",
+    "line_number": "ui.line_number",
+    "cursor_line": "ui.cursor_line",
+    "search": "ui.search",
+    "visual": "ui.visual",
+    "border": "ui.border",
+    "fold": "ui.fold"
+  },
+  
+  "ui_elements": {
+    "menu_bg": "ui.bg_dark",
+    "menu_fg": "base.fg",
+    "menu_selection": "ansi.blue",
+    "status_line": "ui.bg_light",
+    "tab_line": "ui.bg_dark",
+    "window_separator": "ui.border"
+  },
+  
+  "diagnostics": {
+    "error": "ui.error",
+    "warning": "ui.warning", 
+    "info": "ui.info",
+    "hint": "ui.hint"
+  }
+}

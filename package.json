@@ -1,0 +1,21 @@
+{
+  "name": "aardvark-blue-generators",
+  "version": "1.0.0",
+  "description": "Platform-agnostic color management for Aardvark Blue theme",
+  "type": "module",
+  "scripts": {
+    "generate": "tsx build/generate.ts",
+    "generate:nvim": "tsx build/generate.ts",
+    "build": "npm run generate",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx watch build/generate.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.4",
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

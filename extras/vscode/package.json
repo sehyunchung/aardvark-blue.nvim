@@ -1,0 +1,60 @@
+{
+  "name": "aardvark-blue-theme",
+  "displayName": "Aardvark Blue Theme",
+  "description": "A deep blue color theme inspired by Ghostty's Aardvark Blue theme, optimized for TypeScript and modern web development",
+  "version": "1.0.0",
+  "publisher": "sehyunchung",
+  "author": {
+    "name": "Sehyun Chung",
+    "email": "sehyun.chung@icloud.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/sehyunchung/aardvark-blue.nvim",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sehyunchung/aardvark-blue.nvim.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sehyunchung/aardvark-blue.nvim/issues"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "dark",
+    "blue",
+    "aardvark",
+    "ghostty",
+    "typescript",
+    "react",
+    "jsx",
+    "tsx",
+    "color-theme",
+    "deep-blue",
+    "syntax-highlighting"
+  ],
+  "galleryBanner": {
+    "color": "#102040",
+    "theme": "dark"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Aardvark Blue",
+        "uiTheme": "vs-dark",
+        "path": "./themes/aardvark-blue-color-theme.json"
+      }
+    ]
+  },
+  "scripts": {
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^2.24.0"
+  }
+}

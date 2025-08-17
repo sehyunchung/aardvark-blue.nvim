@@ -28,6 +28,17 @@ All notable changes to the "Aardvark Blue Theme" extension will be documented in
 - **Terminal Integration**: ANSI colors matching the theme
 - **Complete UI**: All VS Code interface elements themed consistently
 
+## [1.0.1] - 2025-01-17
+
+### Fixed
+- Improved function name color contrast by changing from bright yellow (#ffe763) to regular yellow (#dbba00)
+- Fixed type keyword vs type name distinction - `type`, `interface`, `enum` keywords now properly display in magenta while type names stay cyan
+- Better color harmony between variables (white) and functions (yellow) for reduced eye strain
+
+### Changed  
+- Function names now use regular yellow (#dbba00) instead of bright yellow for better balance with white variables
+- Type declaration keywords explicitly scoped to ensure proper magenta coloring
+
 ## [Unreleased]
 
 ### Planned

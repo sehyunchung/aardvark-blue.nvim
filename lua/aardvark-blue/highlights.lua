@@ -116,13 +116,13 @@ function M.setup(palette, options)
   -- TypeScript specific highlights
   highlights["@keyword.modifier"] = { fg = palette.yellow }     -- public, private, protected, readonly
   highlights["@keyword.type"] = { fg = palette.magenta }        -- interface, type, enum, namespace  
-  highlights["@keyword.operator"] = { fg = palette.cyan }       -- keyof, satisfies, as, is
+  highlights["@keyword.operator.typescript"] = { fg = palette.cyan }  -- keyof, satisfies, as, is (TypeScript only)
   highlights["@attribute"] = { fg = palette.cyan }              -- @Component, @Injectable decorators
   
   -- JSX/TSX specific highlights (override general @tag for JSX)
   highlights["@tag.tsx"] = { fg = palette.bright_blue }         -- React Components in TSX
   highlights["@tag.builtin.tsx"] = { fg = palette.blue }        -- HTML tags in TSX
-  highlights["@tag.attribute.tsx"] = { fg = palette.yellow }    -- JSX attributes
+  highlights["@tag.attribute.tsx"] = { fg = palette.bright_yellow }    -- JSX attributes
   highlights["@tag.delimiter.tsx"] = { fg = palette.white }     -- JSX tag delimiters
   
   -- JSX member expression components (Tabs.Root, UI.Form.Field, etc.)

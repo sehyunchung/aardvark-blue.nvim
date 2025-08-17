@@ -124,6 +124,10 @@ function M.setup(palette, options)
   highlights["@tag.builtin.tsx"] = { fg = palette.blue }        -- HTML tags in TSX
   highlights["@tag.attribute.tsx"] = { fg = palette.yellow }    -- JSX attributes
   highlights["@tag.delimiter.tsx"] = { fg = palette.white }     -- JSX tag delimiters
+  
+  -- JSX member expression components (Tabs.Root, UI.Form.Field, etc.)
+  highlights["@variable.member.tsx"] = { fg = palette.bright_blue }  -- Member components should match @tag.tsx
+  highlights["@property.tsx"] = { fg = palette.bright_blue }         -- Property access in components
 
   -- LSP highlights
   highlights.LspReferenceText = { bg = palette.bg_light }

@@ -460,13 +460,348 @@ function generateNeovimHighlights(): string {
   return luaLines.join('\n');
 }
 
+// Generate VS Code theme JSON
+function generateVSCodeTheme(): string {
+  const theme = {
+    name: "Aardvark Blue",
+    type: "dark",
+    semanticHighlighting: true,
+    colors: {
+      // Editor core
+      "editor.background": resolveSemantic('editor.background'),
+      "editor.foreground": resolveSemantic('editor.foreground'),
+      "editorLineNumber.foreground": resolveSemantic('editor.line_number'),
+      "editorLineNumber.activeForeground": resolveSemantic('editor.foreground'),
+      "editor.lineHighlightBackground": resolveSemantic('editor.cursor_line') + "20",
+      "editor.selectionBackground": resolveSemantic('editor.selection') + "30",
+      "editor.selectionHighlightBackground": resolveSemantic('editor.selection') + "20",
+      "editor.findMatchBackground": resolveSemantic('editor.search') + "50",
+      "editor.findMatchHighlightBackground": resolveSemantic('editor.search') + "30",
+      "editorCursor.foreground": resolveSemantic('editor.cursor'),
+      "editorWhitespace.foreground": resolveSemantic('syntax.comment') + "40",
+      "editorIndentGuide.background1": resolveSemantic('syntax.comment') + "30",
+      "editorIndentGuide.activeBackground1": resolveSemantic('syntax.comment') + "60",
+      "editorRuler.foreground": resolveSemantic('syntax.comment') + "40",
+      
+      // Editor widgets
+      "editorWidget.background": resolveSemantic('ui_elements.menu_bg'),
+      "editorWidget.border": resolveSemantic('ui_elements.window_separator'),
+      "editorSuggestWidget.background": resolveSemantic('ui_elements.menu_bg'),
+      "editorSuggestWidget.border": resolveSemantic('ui_elements.window_separator'),
+      "editorSuggestWidget.selectedBackground": resolveSemantic('editor.cursor_line'),
+      "editorHoverWidget.background": resolveSemantic('ui_elements.menu_bg'),
+      "editorHoverWidget.border": resolveSemantic('ui_elements.window_separator'),
+      
+      // Activity bar
+      "activityBar.background": resolveSemantic('editor.background'),
+      "activityBar.foreground": resolveSemantic('editor.foreground'),
+      "activityBar.inactiveForeground": resolveSemantic('syntax.comment'),
+      "activityBar.border": resolveSemantic('ui_elements.window_separator'),
+      "activityBarBadge.background": resolveSemantic('syntax.number'),
+      "activityBarBadge.foreground": resolveSemantic('editor.background'),
+      
+      // Sidebar
+      "sideBar.background": resolveSemantic('ui_elements.menu_bg'),
+      "sideBar.foreground": resolveSemantic('editor.foreground'),
+      "sideBar.border": resolveSemantic('ui_elements.window_separator'),
+      "sideBarTitle.foreground": resolveSemantic('editor.foreground'),
+      "sideBarSectionHeader.background": resolveSemantic('editor.cursor_line'),
+      "sideBarSectionHeader.foreground": resolveSemantic('editor.foreground'),
+      
+      // Lists
+      "list.activeSelectionBackground": resolveSemantic('editor.cursor_line'),
+      "list.activeSelectionForeground": resolveSemantic('editor.foreground'),
+      "list.hoverBackground": resolveSemantic('editor.cursor_line') + "50",
+      "list.inactiveSelectionBackground": resolveSemantic('editor.cursor_line') + "30",
+      "list.dropBackground": resolveSemantic('syntax.number') + "30",
+      
+      // Title bar
+      "titleBar.activeBackground": resolveSemantic('editor.background'),
+      "titleBar.activeForeground": resolveSemantic('editor.foreground'),
+      "titleBar.inactiveBackground": resolveSemantic('ui_elements.menu_bg'),
+      "titleBar.inactiveForeground": resolveSemantic('syntax.comment'),
+      "titleBar.border": resolveSemantic('ui_elements.window_separator'),
+      
+      // Status bar
+      "statusBar.background": resolveSemantic('editor.background'),
+      "statusBar.foreground": resolveSemantic('editor.foreground'),
+      "statusBar.border": resolveSemantic('ui_elements.window_separator'),
+      "statusBar.debuggingBackground": resolveSemantic('syntax.keyword'),
+      "statusBar.debuggingForeground": resolveSemantic('editor.foreground'),
+      "statusBar.noFolderBackground": resolveSemantic('editor.background'),
+      
+      // Panel
+      "panel.background": resolveSemantic('ui_elements.menu_bg'),
+      "panel.border": resolveSemantic('ui_elements.window_separator'),
+      "panelTitle.activeForeground": resolveSemantic('editor.foreground'),
+      "panelTitle.inactiveForeground": resolveSemantic('syntax.comment'),
+      
+      // Tabs
+      "tab.activeBackground": resolveSemantic('editor.background'),
+      "tab.activeForeground": resolveSemantic('editor.foreground'),
+      "tab.inactiveBackground": resolveSemantic('ui_elements.menu_bg'),
+      "tab.inactiveForeground": resolveSemantic('syntax.comment'),
+      "tab.border": resolveSemantic('ui_elements.window_separator'),
+      "editorGroupHeader.tabsBackground": resolveSemantic('ui_elements.menu_bg'),
+      
+      // Breadcrumb
+      "breadcrumb.background": resolveSemantic('editor.background'),
+      "breadcrumb.foreground": resolveSemantic('syntax.comment'),
+      "breadcrumb.focusForeground": resolveSemantic('editor.foreground'),
+      
+      // Git decorations
+      "gitDecoration.modifiedResourceForeground": resolveSemantic('syntax.warning'),
+      "gitDecoration.deletedResourceForeground": resolveSemantic('syntax.error'),
+      "gitDecoration.untrackedResourceForeground": resolveSemantic('syntax.string'),
+      "gitDecoration.ignoredResourceForeground": resolveSemantic('syntax.comment'),
+      "gitDecoration.conflictingResourceForeground": resolveSemantic('typescript.type_keyword'),
+      
+      // Scrollbar
+      "scrollbar.shadow": resolveSemantic('ui_elements.menu_bg') + "80",
+      "scrollbarSlider.background": resolveSemantic('syntax.comment') + "30",
+      "scrollbarSlider.hoverBackground": resolveSemantic('syntax.comment') + "50",
+      "scrollbarSlider.activeBackground": resolveSemantic('syntax.comment') + "70",
+      
+      // Badge and progress
+      "badge.background": resolveSemantic('syntax.number'),
+      "badge.foreground": resolveSemantic('editor.background'),
+      "progressBar.background": resolveSemantic('syntax.number'),
+      
+      // Notifications
+      "notificationCenter.border": resolveSemantic('ui_elements.window_separator'),
+      "notificationCenterHeader.foreground": resolveSemantic('editor.foreground'),
+      "notificationCenterHeader.background": resolveSemantic('ui_elements.menu_bg'),
+      "notificationToast.border": resolveSemantic('ui_elements.window_separator'),
+      "notifications.foreground": resolveSemantic('editor.foreground'),
+      "notifications.background": resolveSemantic('ui_elements.menu_bg'),
+      "notifications.border": resolveSemantic('ui_elements.window_separator'),
+      "notificationLink.foreground": resolveSemantic('syntax.number'),
+      
+      // Terminal colors
+      "terminal.background": resolveSemantic('editor.background'),
+      "terminal.foreground": resolveSemantic('editor.foreground'),
+      "terminal.ansiBlack": resolveColor('ansi.black'),
+      "terminal.ansiRed": resolveColor('ansi.red'),
+      "terminal.ansiGreen": resolveColor('ansi.green'),
+      "terminal.ansiYellow": resolveColor('ansi.yellow'),
+      "terminal.ansiBlue": resolveColor('ansi.blue'),
+      "terminal.ansiMagenta": resolveColor('ansi.magenta'),
+      "terminal.ansiCyan": resolveColor('ansi.cyan'),
+      "terminal.ansiWhite": resolveColor('ansi.white'),
+      "terminal.ansiBrightBlack": resolveColor('bright.black'),
+      "terminal.ansiBrightRed": resolveColor('bright.red'),
+      "terminal.ansiBrightGreen": resolveColor('bright.green'),
+      "terminal.ansiBrightYellow": resolveColor('bright.yellow'),
+      "terminal.ansiBrightBlue": resolveColor('bright.blue'),
+      "terminal.ansiBrightMagenta": resolveColor('bright.magenta'),
+      "terminal.ansiBrightCyan": resolveColor('bright.cyan'),
+      "terminal.ansiBrightWhite": resolveColor('bright.white')
+    },
+    tokenColors: [
+      {
+        settings: {
+          foreground: resolveSemantic('editor.foreground')
+        }
+      },
+      {
+        name: "Comments",
+        scope: ["comment", "punctuation.definition.comment"],
+        settings: {
+          foreground: resolveSemantic('syntax.comment'),
+          fontStyle: "italic"
+        }
+      },
+      {
+        name: "Keywords (if, else, while, try, pub)",
+        scope: [
+          "keyword.control",
+          "keyword.control.conditional", 
+          "keyword.control.loop",
+          "keyword.control.exception",
+          "keyword.other.pub",
+          "storage.modifier"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.keyword')
+        }
+      },
+      {
+        name: "Function keyword (fn)",
+        scope: [
+          "storage.type.function",
+          "keyword.other.fn",
+          "keyword.control.def"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.keyword_function')
+        }
+      },
+      {
+        name: "Function names",
+        scope: [
+          "entity.name.function",
+          "meta.function-call.generic",
+          "support.function"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.function')
+        }
+      },
+      {
+        name: "Variables",
+        scope: [
+          "variable",
+          "variable.other",
+          "variable.parameter"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.identifier')
+        }
+      },
+      {
+        name: "Strings",
+        scope: [
+          "string",
+          "string.quoted",
+          "string.template"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.string')
+        }
+      },
+      {
+        name: "Numbers",
+        scope: [
+          "constant.numeric",
+          "constant.numeric.integer",
+          "constant.numeric.float"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.number')
+        }
+      },
+      {
+        name: "Booleans and Constants",
+        scope: [
+          "constant.language.boolean",
+          "constant.language",
+          "constant.other"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.boolean')
+        }
+      },
+      {
+        name: "Types",
+        scope: [
+          "support.type",
+          "entity.name.type",
+          "storage.type",
+          "entity.name.class"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.type')
+        }
+      },
+      {
+        name: "TypeScript Modifiers",
+        scope: [
+          "storage.modifier.public.ts",
+          "storage.modifier.private.ts",
+          "storage.modifier.protected.ts",
+          "storage.modifier.readonly.ts"
+        ],
+        settings: {
+          foreground: resolveSemantic('typescript.modifier')
+        }
+      },
+      {
+        name: "TypeScript Type Keywords",
+        scope: [
+          "storage.type.interface.ts",
+          "storage.type.type.ts",
+          "storage.type.enum.ts"
+        ],
+        settings: {
+          foreground: resolveSemantic('typescript.type_keyword')
+        }
+      },
+      {
+        name: "TypeScript Operators",
+        scope: [
+          "keyword.operator.type.ts",
+          "keyword.operator.expression.keyof.ts",
+          "keyword.control.as.ts"
+        ],
+        settings: {
+          foreground: resolveSemantic('typescript.type_operator')
+        }
+      },
+      {
+        name: "JSX Components",
+        scope: [
+          "support.class.component.tsx",
+          "entity.name.tag.tsx"
+        ],
+        settings: {
+          foreground: resolveSemantic('jsx.component')
+        }
+      },
+      {
+        name: "JSX HTML Tags",
+        scope: [
+          "entity.name.tag.html.tsx"
+        ],
+        settings: {
+          foreground: resolveSemantic('jsx.html_tag')
+        }
+      },
+      {
+        name: "JSX Attributes",
+        scope: [
+          "entity.other.attribute-name.tsx"
+        ],
+        settings: {
+          foreground: resolveSemantic('jsx.attribute')
+        }
+      },
+      {
+        name: "Decorators",
+        scope: [
+          "meta.decorator",
+          "punctuation.decorator"
+        ],
+        settings: {
+          foreground: resolveSemantic('typescript.decorator')
+        }
+      },
+      {
+        name: "Punctuation",
+        scope: [
+          "punctuation.separator",
+          "punctuation.terminator",
+          "punctuation.definition"
+        ],
+        settings: {
+          foreground: resolveSemantic('syntax.delimiter')
+        }
+      }
+    ]
+  };
+  
+  return JSON.stringify(theme, null, 2);
+}
+
 // Ensure output directories exist  
 const outputDir = path.join(__dirname, '../lua/aardvark-blue');
+const vscodeOutputDir = path.join(__dirname, '../extras/vscode/themes');
 fs.mkdirSync(outputDir, { recursive: true });
+fs.mkdirSync(vscodeOutputDir, { recursive: true });
 
 // Generate files
-console.log('Generating Neovim color files...');
+console.log('Generating color themes from JSON...');
 
+// Neovim files
 const paletteContent = generateNeovimPalette();
 fs.writeFileSync(path.join(outputDir, 'palette.lua'), paletteContent);
 console.log('✓ Generated palette.lua');
@@ -475,4 +810,11 @@ const highlightsContent = generateNeovimHighlights();
 fs.writeFileSync(path.join(outputDir, 'highlights.lua'), highlightsContent);
 console.log('✓ Generated highlights.lua');
 
-console.log('\\nGeneration complete! Files written to lua/aardvark-blue/');
+// VS Code theme
+const vscodeThemeContent = generateVSCodeTheme();
+fs.writeFileSync(path.join(vscodeOutputDir, 'aardvark-blue-color-theme.json'), vscodeThemeContent);
+console.log('✓ Generated aardvark-blue-color-theme.json');
+
+console.log('\\nGeneration complete! Files written to:');
+console.log('  - lua/aardvark-blue/ (Neovim)');
+console.log('  - extras/vscode/themes/ (VS Code)');

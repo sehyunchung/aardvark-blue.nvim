@@ -12,196 +12,181 @@ function M.setup(palette, options)
   }
 
   -- Editor highlights
-  highlights.Normal = { fg = palette.fg, bg = options.transparent and palette.none or palette.bg }
-  highlights.NormalFloat = { fg = palette.fg, bg = palette.bg_dark }
-  highlights.NormalNC = { fg = palette.fg, bg = options.transparent and palette.none or palette.bg }
-  highlights.LineNr = { fg = palette.line_number }
-  highlights.CursorLine = { bg = palette.cursor_line }
-  highlights.CursorLineNr = { fg = palette.bright_blue, bold = true }
-  highlights.CursorColumn = { bg = palette.cursor_line }
-  highlights.ColorColumn = { bg = palette.bg_light }
-  highlights.Cursor = { fg = palette.bg, bg = palette.cursor }
-  highlights.Visual = { fg = palette.bright_white, bg = palette.visual }
-  highlights.VisualNOS = { fg = palette.bright_white, bg = palette.visual }
-  highlights.Search = { fg = palette.bg, bg = palette.search }
-  highlights.IncSearch = { fg = palette.bg, bg = palette.bright_yellow }
-  highlights.CurSearch = { fg = palette.bg, bg = palette.bright_yellow }
-  highlights.MatchParen = { fg = palette.bright_cyan, bold = true }
+  highlights.Normal = { fg = "#dddddd", bg = options.transparent and palette.none or "#102040" }
+  highlights.NormalFloat = { fg = "#dddddd", bg = options.transparent and palette.none or "#0a1530" }
+  highlights.NormalNC = { fg = "#dddddd", bg = options.transparent and palette.none or "#102040" }
+  highlights.LineNr = { fg = "#6a7a8a" }
+  highlights.CursorLine = { bg = "#1a3050" }
+  highlights.CursorLineNr = { fg = "#60a4ec", bold = true }
+  highlights.CursorColumn = { bg = "#1a3050" }
+  highlights.ColorColumn = { bg = "#1a3050" }
+  highlights.Cursor = { fg = "#102040", bg = "#007acc" }
+  highlights.Visual = { bg = "#bfdbfe" }
+  highlights.VisualNOS = { bg = "#bfdbfe" }
+  highlights.Search = { fg = "#102040", bg = "#ffe763" }
+  highlights.IncSearch = { fg = "#102040", bg = "#ffe763" }
+  highlights.CurSearch = { fg = "#102040", bg = "#ffe763" }
+  highlights.MatchParen = { fg = "#60b6cb", bold = true }
 
   -- Syntax highlighting
-  highlights.Comment = vim.tbl_extend("force", { fg = palette.comment }, styles.comments)
-  highlights.Constant = { fg = palette.bright_red }
-  highlights.String = { fg = palette.bright_green }  -- Match Ghostty green strings
-  highlights.Character = { fg = palette.bright_green }
-  highlights.Number = { fg = palette.bright_blue }  -- Match Ghostty blue numbers
-  highlights.Boolean = { fg = palette.bright_red }
-  highlights.Float = { fg = palette.bright_blue }  -- Match Ghostty blue numbers
-  highlights.Identifier = vim.tbl_extend("force", { fg = palette.fg }, styles.variables)  -- White variables
-  highlights.Function = vim.tbl_extend("force", { fg = palette.bright_yellow }, styles.functions)  -- Yellow functions
-  highlights.Statement = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
-  highlights.Conditional = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
-  highlights.Repeat = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
-  highlights.Label = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
-  highlights.Operator = { fg = palette.bright_cyan }  -- Match Ghostty cyan operators
-  highlights.Keyword = vim.tbl_extend("force", { fg = palette.magenta }, styles.keywords)
-  highlights.Exception = vim.tbl_extend("force", { fg = palette.red }, styles.keywords)
-  highlights.PreProc = { fg = palette.yellow }
-  highlights.Include = { fg = palette.magenta }
-  highlights.Define = { fg = palette.magenta }
-  highlights.Macro = { fg = palette.yellow }
-  highlights.PreCondit = { fg = palette.yellow }
-  highlights.Type = { fg = palette.bright_cyan }  -- Match Ghostty cyan types
-  highlights.StorageClass = { fg = palette.yellow }
-  highlights.Structure = { fg = palette.yellow }
-  highlights.Typedef = { fg = palette.yellow }
-  highlights.Special = { fg = palette.cyan }
-  highlights.SpecialChar = { fg = palette.bright_cyan }
-  highlights.Tag = { fg = palette.blue }
-  highlights.Delimiter = { fg = palette.white }
-  highlights.SpecialComment = { fg = palette.bright_cyan }
-  highlights.Debug = { fg = palette.red }
+  highlights.Comment = vim.tbl_extend("force", { fg = "#6a7a8a" }, styles.comments)
+  highlights.Constant = { fg = "#f05b50" }
+  highlights.String = { fg = "#95dc55" }
+  highlights.Character = { fg = "#95dc55" }
+  highlights.Number = { fg = "#60a4ec" }
+  highlights.Boolean = { fg = "#f05b50" }
+  highlights.Float = { fg = "#60a4ec" }
+  highlights.Identifier = vim.tbl_extend("force", { fg = "#dddddd" }, styles.variables)
+  highlights.Function = vim.tbl_extend("force", { fg = "#ffe763" }, styles.functions)
+  highlights.Statement = vim.tbl_extend("force", { fg = "#c43ac3" }, styles.keywords)
+  highlights.Conditional = vim.tbl_extend("force", { fg = "#c43ac3" }, styles.keywords)
+  highlights.Repeat = vim.tbl_extend("force", { fg = "#c43ac3" }, styles.keywords)
+  highlights.Label = vim.tbl_extend("force", { fg = "#c43ac3" }, styles.keywords)
+  highlights.Operator = { fg = "#60b6cb" }
+  highlights.Keyword = vim.tbl_extend("force", { fg = "#c43ac3" }, styles.keywords)
+  highlights.Exception = vim.tbl_extend("force", { fg = "#aa342e" }, styles.keywords)
+  highlights.PreProc = { fg = "#dbba00" }
+  highlights.Include = { fg = "#c43ac3" }
+  highlights.Define = { fg = "#c43ac3" }
+  highlights.Macro = { fg = "#dbba00" }
+  highlights.PreCondit = { fg = "#dbba00" }
+  highlights.Type = { fg = "#60b6cb" }
+  highlights.StorageClass = { fg = "#dbba00" }
+  highlights.Structure = { fg = "#dbba00" }
+  highlights.Typedef = { fg = "#dbba00" }
+  highlights.Special = { fg = "#008eb0" }
+  highlights.SpecialChar = { fg = "#60b6cb" }
+  highlights.Tag = { fg = "#1370d3" }
+  highlights.Delimiter = { fg = "#bebebe" }
+  highlights.SpecialComment = { fg = "#60b6cb" }
+  highlights.Debug = { fg = "#aa342e" }
   highlights.Underlined = { underline = true }
-  highlights.Ignore = { fg = palette.comment }
-  highlights.Error = { fg = palette.error }
-  highlights.Todo = { fg = palette.bg, bg = palette.yellow, bold = true }
+  highlights.Ignore = { fg = "#6a7a8a" }
+  highlights.Error = { fg = "#f05b50" }
+  highlights.Todo = { fg = "#102040", bg = "#dbba00", bold = true }
 
   -- TreeSitter highlights
   highlights["@variable"] = highlights.Identifier
-  highlights["@variable.builtin"] = { fg = palette.red }
-  highlights["@variable.parameter"] = { fg = palette.bright_white }
-  highlights["@variable.member"] = { fg = palette.blue }
+  highlights["@variable.builtin"] = { fg = "#aa342e" }
+  highlights["@variable.parameter"] = { fg = "#f7f7f7" }
+  highlights["@variable.member"] = { fg = "#1370d3" }
   highlights["@constant"] = highlights.Constant
-  highlights["@constant.builtin"] = { fg = palette.red }
-  highlights["@constant.macro"] = { fg = palette.yellow }
-  highlights["@module"] = { fg = palette.yellow }
+  highlights["@constant.builtin"] = { fg = "#aa342e" }
+  highlights["@constant.macro"] = { fg = "#dbba00" }
+  highlights["@module"] = { fg = "#dbba00" }
   highlights["@label"] = highlights.Label
-  highlights["@string"] = { fg = palette.bright_green }  -- Match Ghostty green strings
-  highlights["@string.escape"] = { fg = palette.cyan }
-  highlights["@string.special"] = { fg = palette.cyan }
+  highlights["@string"] = { fg = "#95dc55" }
+  highlights["@string.escape"] = { fg = "#008eb0" }
+  highlights["@string.special"] = { fg = "#008eb0" }
   highlights["@character"] = highlights.Character
-  highlights["@number"] = { fg = palette.bright_blue }  -- Match Ghostty blue numbers
+  highlights["@number"] = { fg = "#60a4ec" }
   highlights["@boolean"] = highlights.Boolean
-  highlights["@float"] = { fg = palette.bright_blue }  -- Match Ghostty blue numbers
-  highlights["@function"] = { fg = palette.bright_yellow }  -- Match Ghostty yellow functions
-  highlights["@function.builtin"] = { fg = palette.bright_yellow }
-  highlights["@function.macro"] = { fg = palette.bright_yellow }
-  highlights["@function.method"] = { fg = palette.bright_yellow }
-  highlights["@constructor"] = { fg = palette.bright_yellow }
-  highlights["@operator"] = { fg = palette.bright_cyan }  -- Match Ghostty cyan operators
+  highlights["@float"] = { fg = "#60a4ec" }
+  highlights["@function"] = { fg = "#ffe763" }
+  highlights["@function.builtin"] = { fg = "#ffe763" }
+  highlights["@function.macro"] = { fg = "#ffe763" }
+  highlights["@function.method"] = { fg = "#ffe763" }
+  highlights["@constructor"] = { fg = "#ffe763" }
+  highlights["@operator"] = { fg = "#60b6cb" }
   highlights["@keyword"] = highlights.Keyword
-  highlights["@keyword.function"] = { fg = palette.bright_blue }  -- `fn` in bright blue
-  highlights["@keyword.operator"] = { fg = palette.magenta }  -- `pub` stays magenta
-  highlights["@keyword.return"] = { fg = palette.magenta }
-  highlights["@keyword.conditional"] = { fg = palette.magenta }  -- `if`, `else`
-  highlights["@keyword.repeat"] = { fg = palette.magenta }  -- `while`
-  highlights["@keyword.import"] = { fg = palette.magenta }
-  highlights["@keyword.exception"] = { fg = palette.magenta }  -- `try`
-  highlights["@type"] = { fg = palette.bright_cyan }  -- Match Ghostty cyan types
-  highlights["@type.builtin"] = { fg = palette.bright_cyan }  -- usize, void, etc.
-  highlights["@type.definition"] = { fg = palette.bright_cyan }
-  highlights["@attribute"] = { fg = palette.cyan }
-  highlights["@property"] = { fg = palette.blue }
+  highlights["@keyword.function"] = { fg = "#60a4ec" }
+  highlights["@keyword.operator"] = { fg = "#c43ac3" }
+  highlights["@keyword.return"] = { fg = "#c43ac3" }
+  highlights["@keyword.conditional"] = { fg = "#c43ac3" }
+  highlights["@keyword.repeat"] = { fg = "#c43ac3" }
+  highlights["@keyword.import"] = { fg = "#c43ac3" }
+  highlights["@keyword.exception"] = { fg = "#c43ac3" }
+  highlights["@type"] = { fg = "#60b6cb" }
+  highlights["@type.builtin"] = { fg = "#60b6cb" }
+  highlights["@type.definition"] = { fg = "#60b6cb" }
+  highlights["@attribute"] = { fg = "#008eb0" }
+  highlights["@property"] = { fg = "#1370d3" }
   highlights["@comment"] = highlights.Comment
   highlights["@comment.todo"] = highlights.Todo
-  highlights["@comment.warning"] = { fg = palette.warning }
-  highlights["@comment.note"] = { fg = palette.info }
-  highlights["@comment.error"] = { fg = palette.error }
+  highlights["@comment.warning"] = { fg = "#ffe763" }
+  highlights["@comment.note"] = { fg = "#60a4ec" }
+  highlights["@comment.error"] = { fg = "#f05b50" }
   highlights["@punctuation.delimiter"] = highlights.Delimiter
-  highlights["@punctuation.bracket"] = { fg = palette.white }
-  highlights["@punctuation.special"] = { fg = palette.cyan }
+  highlights["@punctuation.bracket"] = { fg = "#bebebe" }
+  highlights["@punctuation.special"] = { fg = "#008eb0" }
   highlights["@tag"] = highlights.Tag
-  highlights["@tag.attribute"] = { fg = palette.yellow }
-  highlights["@tag.delimiter"] = { fg = palette.white }
+  highlights["@tag.attribute"] = { fg = "#dbba00" }
+  highlights["@tag.delimiter"] = { fg = "#bebebe" }
 
   -- TypeScript specific highlights
-  highlights["@keyword.modifier"] = { fg = palette.yellow }     -- public, private, protected, readonly
-  highlights["@keyword.type"] = { fg = palette.magenta }        -- interface, type, enum, namespace  
-  highlights["@keyword.operator.typescript"] = { fg = palette.cyan }  -- keyof, satisfies, as, is (TypeScript only)
-  highlights["@attribute"] = { fg = palette.cyan }              -- @Component, @Injectable decorators
-  
+  highlights["@keyword.modifier"] = { fg = "#dbba00" }
+  highlights["@keyword.type"] = { fg = "#c43ac3" }
+  highlights["@keyword.operator.typescript"] = { fg = "#008eb0" }
+  highlights["@attribute"] = { fg = "#008eb0" }
+
   -- JSX/TSX specific highlights (override general @tag for JSX)
-  highlights["@tag.tsx"] = { fg = palette.bright_blue }         -- React Components in TSX
-  highlights["@tag.builtin.tsx"] = { fg = palette.blue }        -- HTML tags in TSX
-  highlights["@tag.attribute.tsx"] = { fg = palette.bright_yellow }    -- JSX attributes
-  highlights["@tag.delimiter.tsx"] = { fg = palette.white }     -- JSX tag delimiters
-  
+  highlights["@tag.tsx"] = { fg = "#60a4ec" }
+  highlights["@tag.builtin.tsx"] = { fg = "#1370d3" }
+  highlights["@tag.attribute.tsx"] = { fg = "#ffe763" }
+  highlights["@tag.delimiter.tsx"] = { fg = "#bebebe" }
+
   -- JSX member expression components (Tabs.Root, UI.Form.Field, etc.)
-  highlights["@variable.member.tsx"] = { fg = palette.bright_blue }  -- Member components should match @tag.tsx
-  highlights["@property.tsx"] = { fg = palette.bright_blue }         -- Property access in components
+  highlights["@variable.member.tsx"] = { fg = "#60a4ec" }
+  highlights["@property.tsx"] = { fg = "#60a4ec" }
 
   -- LSP highlights
-  highlights.LspReferenceText = { bg = palette.bg_light }
-  highlights.LspReferenceRead = { bg = palette.bg_light }
-  highlights.LspReferenceWrite = { bg = palette.bg_light }
-  highlights.DiagnosticError = { fg = palette.error }
-  highlights.DiagnosticWarn = { fg = palette.warning }
-  highlights.DiagnosticInfo = { fg = palette.info }
-  highlights.DiagnosticHint = { fg = palette.hint }
-  highlights.DiagnosticSignError = { fg = palette.error }
-  highlights.DiagnosticSignWarn = { fg = palette.warning }
-  highlights.DiagnosticSignInfo = { fg = palette.info }
-  highlights.DiagnosticSignHint = { fg = palette.hint }
-  highlights.DiagnosticUnderlineError = { underline = true, sp = palette.error }
-  highlights.DiagnosticUnderlineWarn = { underline = true, sp = palette.warning }
-  highlights.DiagnosticUnderlineInfo = { underline = true, sp = palette.info }
-  highlights.DiagnosticUnderlineHint = { underline = true, sp = palette.hint }
+  highlights.LspReferenceText = { bg = "#1a3050" }
+  highlights.LspReferenceRead = { bg = "#1a3050" }
+  highlights.LspReferenceWrite = { bg = "#1a3050" }
+  highlights.DiagnosticError = { fg = "#f05b50" }
+  highlights.DiagnosticWarn = { fg = "#ffe763" }
+  highlights.DiagnosticInfo = { fg = "#60a4ec" }
+  highlights.DiagnosticHint = { fg = "#60b6cb" }
+  highlights.DiagnosticSignError = { fg = "#f05b50" }
+  highlights.DiagnosticSignWarn = { fg = "#ffe763" }
+  highlights.DiagnosticSignInfo = { fg = "#60a4ec" }
+  highlights.DiagnosticSignHint = { fg = "#60b6cb" }
+  highlights.DiagnosticUnderlineError = { underline = true, sp = "#f05b50" }
+  highlights.DiagnosticUnderlineWarn = { underline = true, sp = "#ffe763" }
+  highlights.DiagnosticUnderlineInfo = { underline = true, sp = "#60a4ec" }
+  highlights.DiagnosticUnderlineHint = { underline = true, sp = "#60b6cb" }
 
   -- UI elements
-  highlights.Pmenu = { fg = palette.fg, bg = palette.bg_dark }
-  highlights.PmenuSel = { fg = palette.bg, bg = palette.blue }
-  highlights.PmenuSbar = { bg = palette.bg_light }
-  highlights.PmenuThumb = { bg = palette.border }
-  highlights.StatusLine = { fg = palette.fg, bg = palette.bg_light }
-  highlights.StatusLineNC = { fg = palette.comment, bg = palette.bg_dark }
-  highlights.TabLine = { fg = palette.comment, bg = palette.bg_dark }
-  highlights.TabLineFill = { bg = palette.bg_dark }
-  highlights.TabLineSel = { fg = palette.fg, bg = palette.bg }
-  highlights.WinSeparator = { fg = palette.border }
-  highlights.VertSplit = { fg = palette.border }
-  highlights.Folded = { fg = palette.comment, bg = palette.fold }
-  highlights.FoldColumn = { fg = palette.comment }
-  highlights.SignColumn = { fg = palette.fg, bg = options.transparent and palette.none or palette.bg }
-  highlights.Directory = { fg = palette.blue }
-  highlights.Title = { fg = palette.bright_blue, bold = true }
-  highlights.ErrorMsg = { fg = palette.error }
-  highlights.WarningMsg = { fg = palette.warning }
-  highlights.Question = { fg = palette.cyan }
-  highlights.MoreMsg = { fg = palette.cyan }
-  highlights.ModeMsg = { fg = palette.cyan }
-
-  -- Telescope
-  highlights.TelescopeNormal = { fg = palette.fg, bg = palette.bg }
-  highlights.TelescopeBorder = { fg = palette.border, bg = palette.bg }
-  highlights.TelescopeTitle = { fg = palette.bright_cyan, bold = true }
-  highlights.TelescopePromptTitle = { fg = palette.bright_yellow, bold = true }
-  highlights.TelescopeResultsTitle = { fg = palette.bright_blue, bold = true }
-  highlights.TelescopePreviewTitle = { fg = palette.bright_green, bold = true }
-  highlights.TelescopePromptNormal = { fg = palette.fg, bg = palette.bg_dark }
-  highlights.TelescopePromptBorder = { fg = palette.border, bg = palette.bg_dark }
-  highlights.TelescopePromptPrefix = { fg = palette.bright_cyan }
-  highlights.TelescopeSelection = { fg = palette.bright_white, bg = palette.bg_light }
-  highlights.TelescopeSelectionCaret = { fg = palette.bright_yellow, bg = palette.bg_light }
-  highlights.TelescopeMultiSelection = { fg = palette.bright_yellow, bg = palette.bg_light }
-  highlights.TelescopeMatching = { fg = palette.bright_yellow, bold = true }
+  highlights.Pmenu = { fg = "#dddddd", bg = "#0a1530" }
+  highlights.PmenuSel = { fg = "#102040", bg = "#1370d3" }
+  highlights.PmenuSbar = { bg = "#1a3050" }
+  highlights.PmenuThumb = { bg = "#2a4060" }
+  highlights.StatusLine = { fg = "#dddddd", bg = "#1a3050" }
+  highlights.StatusLineNC = { fg = "#6a7a8a", bg = "#0a1530" }
+  highlights.TabLine = { fg = "#6a7a8a", bg = "#0a1530" }
+  highlights.TabLineFill = { bg = "#0a1530" }
+  highlights.TabLineSel = { fg = "#dddddd", bg = "#102040" }
+  highlights.WinSeparator = { fg = "#2a4060" }
+  highlights.VertSplit = { fg = "#2a4060" }
+  highlights.Folded = { fg = "#6a7a8a", bg = "#1a3050" }
+  highlights.FoldColumn = { fg = "#6a7a8a" }
+  highlights.SignColumn = { fg = "#dddddd", bg = options.transparent and palette.none or "#102040" }
+  highlights.Directory = { fg = "#1370d3" }
+  highlights.Title = { fg = "#60a4ec", bold = true }
+  highlights.ErrorMsg = { fg = "#f05b50" }
+  highlights.WarningMsg = { fg = "#ffe763" }
+  highlights.Question = { fg = "#008eb0" }
+  highlights.MoreMsg = { fg = "#008eb0" }
+  highlights.ModeMsg = { fg = "#008eb0" }
 
   -- Terminal colors
   if options.terminal_colors then
-    vim.g.terminal_color_0 = palette.black
-    vim.g.terminal_color_1 = palette.red
-    vim.g.terminal_color_2 = palette.green
-    vim.g.terminal_color_3 = palette.yellow
-    vim.g.terminal_color_4 = palette.blue
-    vim.g.terminal_color_5 = palette.magenta
-    vim.g.terminal_color_6 = palette.cyan
-    vim.g.terminal_color_7 = palette.white
-    vim.g.terminal_color_8 = palette.bright_black
-    vim.g.terminal_color_9 = palette.bright_red
-    vim.g.terminal_color_10 = palette.bright_green
-    vim.g.terminal_color_11 = palette.bright_yellow
-    vim.g.terminal_color_12 = palette.bright_blue
-    vim.g.terminal_color_13 = palette.bright_magenta
-    vim.g.terminal_color_14 = palette.bright_cyan
-    vim.g.terminal_color_15 = palette.bright_white
+    vim.g.terminal_color_0 = "#191919"
+    vim.g.terminal_color_1 = "#aa342e"
+    vim.g.terminal_color_2 = "#4b8c0f"
+    vim.g.terminal_color_3 = "#dbba00"
+    vim.g.terminal_color_4 = "#1370d3"
+    vim.g.terminal_color_5 = "#c43ac3"
+    vim.g.terminal_color_6 = "#008eb0"
+    vim.g.terminal_color_7 = "#bebebe"
+    vim.g.terminal_color_8 = "#454545"
+    vim.g.terminal_color_9 = "#f05b50"
+    vim.g.terminal_color_10 = "#95dc55"
+    vim.g.terminal_color_11 = "#ffe763"
+    vim.g.terminal_color_12 = "#60a4ec"
+    vim.g.terminal_color_13 = "#e26be2"
+    vim.g.terminal_color_14 = "#60b6cb"
+    vim.g.terminal_color_15 = "#f7f7f7"
   end
 
   return highlights

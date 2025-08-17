@@ -188,15 +188,27 @@ function generateNeovimHighlights(): string {
   type EditorMapping = {
     fg?: string;
     bg?: string;
+    bold?: boolean;
+    underline?: boolean;
+    sp?: string;
   };
   
   const editorMappings: Record<string, EditorMapping> = {
     'Normal': { fg: 'editor.foreground', bg: 'editor.background' },
     'NormalFloat': { fg: 'editor.foreground', bg: 'ui_elements.menu_bg' },
+    'NormalNC': { fg: 'editor.foreground', bg: 'editor.background' },
     'LineNr': { fg: 'editor.line_number' },
     'CursorLine': { bg: 'editor.cursor_line' },
+    'CursorLineNr': { fg: 'editor.cursor_line_nr', bold: true },
+    'CursorColumn': { bg: 'editor.cursor_column' },
+    'ColorColumn': { bg: 'editor.color_column' },
+    'Cursor': { fg: 'editor.background', bg: 'editor.cursor' },
     'Visual': { bg: 'editor.visual' },
-    'Search': { fg: 'editor.background', bg: 'editor.search' }
+    'VisualNOS': { bg: 'editor.visual_nos' },
+    'Search': { fg: 'editor.background', bg: 'editor.search' },
+    'IncSearch': { fg: 'editor.background', bg: 'editor.inc_search' },
+    'CurSearch': { fg: 'editor.background', bg: 'editor.cur_search' },
+    'MatchParen': { fg: 'editor.match_paren', bold: true }
   };
 
   for (const [group, colors] of Object.entries(editorMappings)) {
@@ -207,11 +219,20 @@ function generateNeovimHighlights(): string {
       parts.push(`fg = "${resolveSemantic(colors.fg)}"`);
     }
     if (colors.bg) {
-      if (group === 'Normal' || group === 'NormalFloat') {
+      if (group === 'Normal' || group === 'NormalFloat' || group === 'NormalNC') {
         parts.push(`bg = options.transparent and palette.none or "${resolveSemantic(colors.bg)}"`);
       } else {
         parts.push(`bg = "${resolveSemantic(colors.bg)}"`);
       }
+    }
+    if (colors.bold) {
+      parts.push('bold = true');
+    }
+    if (colors.underline) {
+      parts.push('underline = true');
+    }
+    if (colors.sp) {
+      parts.push(`sp = "${resolveSemantic(colors.sp)}"`);
     }
     
     highlight += parts.join(', ') + ' }';
@@ -223,29 +244,70 @@ function generateNeovimHighlights(): string {
   
   // Add syntax highlights using semantic mappings
   type SyntaxMapping = {
-    fg: string;
+    fg?: string;
+    bg?: string;
     style?: string;
+    bold?: boolean;
+    underline?: boolean;
   };
   
   const syntaxMappings: Record<string, SyntaxMapping> = {
     'Comment': { fg: 'syntax.comment', style: 'styles.comments' },
+    'Constant': { fg: 'syntax.constant' },
     'String': { fg: 'syntax.string' },
+    'Character': { fg: 'syntax.character' },
     'Number': { fg: 'syntax.number' },
     'Boolean': { fg: 'syntax.boolean' },
+    'Float': { fg: 'syntax.float' },
+    'Identifier': { fg: 'syntax.identifier', style: 'styles.variables' },
     'Function': { fg: 'syntax.function', style: 'styles.functions' },
-    'Identifier': { fg: 'syntax.variable', style: 'styles.variables' },
+    'Statement': { fg: 'syntax.statement', style: 'styles.keywords' },
+    'Conditional': { fg: 'syntax.conditional', style: 'styles.keywords' },
+    'Repeat': { fg: 'syntax.repeat', style: 'styles.keywords' },
+    'Label': { fg: 'syntax.label', style: 'styles.keywords' },
+    'Operator': { fg: 'syntax.operator' },
     'Keyword': { fg: 'syntax.keyword', style: 'styles.keywords' },
+    'Exception': { fg: 'syntax.exception', style: 'styles.keywords' },
+    'PreProc': { fg: 'syntax.preproc' },
+    'Include': { fg: 'syntax.include' },
+    'Define': { fg: 'syntax.define' },
+    'Macro': { fg: 'syntax.macro' },
+    'PreCondit': { fg: 'syntax.precondit' },
     'Type': { fg: 'syntax.type' },
-    'Operator': { fg: 'syntax.operator' }
+    'StorageClass': { fg: 'syntax.storage_class' },
+    'Structure': { fg: 'syntax.structure' },
+    'Typedef': { fg: 'syntax.typedef' },
+    'Special': { fg: 'syntax.special' },
+    'SpecialChar': { fg: 'syntax.special_char' },
+    'Tag': { fg: 'syntax.tag' },
+    'Delimiter': { fg: 'syntax.delimiter' },
+    'SpecialComment': { fg: 'syntax.special_comment' },
+    'Debug': { fg: 'syntax.debug' },
+    'Underlined': { underline: true },
+    'Ignore': { fg: 'syntax.comment' },
+    'Error': { fg: 'syntax.error' },
+    'Todo': { fg: 'editor.background', bg: 'syntax.todo', bold: true }
   };
 
   for (const [group, config] of Object.entries(syntaxMappings)) {
     let highlight = `  highlights.${group} = `;
     
     if (config.style) {
-      highlight += `vim.tbl_extend("force", { fg = "${resolveSemantic(config.fg)}" }, ${config.style})`;
+      const parts: string[] = [];
+      if (config.fg) parts.push(`fg = "${resolveSemantic(config.fg)}"`);
+      if (config.bg) parts.push(`bg = "${resolveSemantic(config.bg)}"`);
+      if (config.bold) parts.push('bold = true');
+      if (config.underline) parts.push('underline = true');
+      
+      highlight += `vim.tbl_extend("force", { ${parts.join(', ')} }, ${config.style})`;
     } else {
-      highlight += `{ fg = "${resolveSemantic(config.fg)}" }`;
+      const parts: string[] = [];
+      if (config.fg) parts.push(`fg = "${resolveSemantic(config.fg)}"`);
+      if (config.bg) parts.push(`bg = "${resolveSemantic(config.bg)}"`);
+      if (config.bold) parts.push('bold = true');
+      if (config.underline) parts.push('underline = true');
+      
+      highlight += `{ ${parts.join(', ')} }`;
     }
     
     luaLines.push(highlight);
@@ -253,14 +315,60 @@ function generateNeovimHighlights(): string {
 
   luaLines.push('');
   luaLines.push('  -- TreeSitter highlights');
-  luaLines.push('  highlights["@variable"] = highlights.Identifier');
-  luaLines.push(`  highlights["@string"] = { fg = "${resolveSemantic('syntax.string')}" }`);
-  luaLines.push(`  highlights["@number"] = { fg = "${resolveSemantic('syntax.number')}" }`);
-  luaLines.push(`  highlights["@function"] = { fg = "${resolveSemantic('syntax.function')}" }`);
-  luaLines.push(`  highlights["@keyword"] = highlights.Keyword`);
-  luaLines.push(`  highlights["@keyword.function"] = { fg = "${resolveSemantic('syntax.keyword_function')}" }`);
-  luaLines.push(`  highlights["@keyword.operator"] = { fg = "${resolveSemantic('syntax.keyword_operator')}" }`);
-  luaLines.push(`  highlights["@type"] = { fg = "${resolveSemantic('syntax.type')}" }`);
+  
+  // TreeSitter mappings
+  const treesitterMappings = [
+    ['@variable', 'highlights.Identifier'],
+    ['@variable.builtin', `{ fg = "${resolveSemantic('treesitter.variable_builtin')}" }`],
+    ['@variable.parameter', `{ fg = "${resolveSemantic('treesitter.variable_parameter')}" }`],
+    ['@variable.member', `{ fg = "${resolveSemantic('treesitter.variable_member')}" }`],
+    ['@constant', 'highlights.Constant'],
+    ['@constant.builtin', `{ fg = "${resolveSemantic('treesitter.constant_builtin')}" }`],
+    ['@constant.macro', `{ fg = "${resolveSemantic('treesitter.constant_macro')}" }`],
+    ['@module', `{ fg = "${resolveSemantic('treesitter.module')}" }`],
+    ['@label', 'highlights.Label'],
+    ['@string', `{ fg = "${resolveSemantic('treesitter.string')}" }`],
+    ['@string.escape', `{ fg = "${resolveSemantic('treesitter.string_escape')}" }`],
+    ['@string.special', `{ fg = "${resolveSemantic('treesitter.string_special')}" }`],
+    ['@character', 'highlights.Character'],
+    ['@number', `{ fg = "${resolveSemantic('treesitter.number')}" }`],
+    ['@boolean', 'highlights.Boolean'],
+    ['@float', `{ fg = "${resolveSemantic('treesitter.float')}" }`],
+    ['@function', `{ fg = "${resolveSemantic('treesitter.function')}" }`],
+    ['@function.builtin', `{ fg = "${resolveSemantic('treesitter.function_builtin')}" }`],
+    ['@function.macro', `{ fg = "${resolveSemantic('treesitter.function_macro')}" }`],
+    ['@function.method', `{ fg = "${resolveSemantic('treesitter.function_method')}" }`],
+    ['@constructor', `{ fg = "${resolveSemantic('treesitter.constructor')}" }`],
+    ['@operator', `{ fg = "${resolveSemantic('treesitter.operator')}" }`],
+    ['@keyword', 'highlights.Keyword'],
+    ['@keyword.function', `{ fg = "${resolveSemantic('treesitter.keyword_function')}" }`],
+    ['@keyword.operator', `{ fg = "${resolveSemantic('treesitter.keyword_operator')}" }`],
+    ['@keyword.return', `{ fg = "${resolveSemantic('treesitter.keyword_return')}" }`],
+    ['@keyword.conditional', `{ fg = "${resolveSemantic('treesitter.keyword_conditional')}" }`],
+    ['@keyword.repeat', `{ fg = "${resolveSemantic('treesitter.keyword_repeat')}" }`],
+    ['@keyword.import', `{ fg = "${resolveSemantic('treesitter.keyword_import')}" }`],
+    ['@keyword.exception', `{ fg = "${resolveSemantic('treesitter.keyword_exception')}" }`],
+    ['@type', `{ fg = "${resolveSemantic('treesitter.type')}" }`],
+    ['@type.builtin', `{ fg = "${resolveSemantic('treesitter.type_builtin')}" }`],
+    ['@type.definition', `{ fg = "${resolveSemantic('treesitter.type_definition')}" }`],
+    ['@attribute', `{ fg = "${resolveSemantic('treesitter.attribute')}" }`],
+    ['@property', `{ fg = "${resolveSemantic('treesitter.property')}" }`],
+    ['@comment', 'highlights.Comment'],
+    ['@comment.todo', 'highlights.Todo'],
+    ['@comment.warning', `{ fg = "${resolveSemantic('treesitter.comment_warning')}" }`],
+    ['@comment.note', `{ fg = "${resolveSemantic('treesitter.comment_note')}" }`],
+    ['@comment.error', `{ fg = "${resolveSemantic('treesitter.comment_error')}" }`],
+    ['@punctuation.delimiter', 'highlights.Delimiter'],
+    ['@punctuation.bracket', `{ fg = "${resolveSemantic('treesitter.punctuation_bracket')}" }`],
+    ['@punctuation.special', `{ fg = "${resolveSemantic('treesitter.punctuation_special')}" }`],
+    ['@tag', 'highlights.Tag'],
+    ['@tag.attribute', `{ fg = "${resolveSemantic('treesitter.tag_attribute')}" }`],
+    ['@tag.delimiter', `{ fg = "${resolveSemantic('treesitter.tag_delimiter')}" }`]
+  ];
+
+  for (const [group, value] of treesitterMappings) {
+    luaLines.push(`  highlights["${group}"] = ${value}`);
+  }
   
   luaLines.push('');
   luaLines.push('  -- TypeScript specific highlights');
@@ -270,12 +378,78 @@ function generateNeovimHighlights(): string {
   luaLines.push(`  highlights["@attribute"] = { fg = "${resolveSemantic('typescript.decorator')}" }`);
   
   luaLines.push('');
-  luaLines.push('  -- JSX/TSX specific highlights');
+  luaLines.push('  -- JSX/TSX specific highlights (override general @tag for JSX)');
   luaLines.push(`  highlights["@tag.tsx"] = { fg = "${resolveSemantic('jsx.component')}" }`);
   luaLines.push(`  highlights["@tag.builtin.tsx"] = { fg = "${resolveSemantic('jsx.html_tag')}" }`);
   luaLines.push(`  highlights["@tag.attribute.tsx"] = { fg = "${resolveSemantic('jsx.attribute')}" }`);
   luaLines.push(`  highlights["@tag.delimiter.tsx"] = { fg = "${resolveSemantic('jsx.delimiter')}" }`);
+  luaLines.push('');
+  luaLines.push('  -- JSX member expression components (Tabs.Root, UI.Form.Field, etc.)');
   luaLines.push(`  highlights["@variable.member.tsx"] = { fg = "${resolveSemantic('jsx.member_component')}" }`);
+  luaLines.push(`  highlights["@property.tsx"] = { fg = "${resolveSemantic('jsx.member_component')}" }`);
+
+  luaLines.push('');
+  luaLines.push('  -- LSP highlights');
+  luaLines.push(`  highlights.LspReferenceText = { bg = "${resolveSemantic('lsp.reference_text')}" }`);
+  luaLines.push(`  highlights.LspReferenceRead = { bg = "${resolveSemantic('lsp.reference_read')}" }`);
+  luaLines.push(`  highlights.LspReferenceWrite = { bg = "${resolveSemantic('lsp.reference_write')}" }`);
+  luaLines.push(`  highlights.DiagnosticError = { fg = "${resolveSemantic('lsp.diagnostic_error')}" }`);
+  luaLines.push(`  highlights.DiagnosticWarn = { fg = "${resolveSemantic('lsp.diagnostic_warn')}" }`);
+  luaLines.push(`  highlights.DiagnosticInfo = { fg = "${resolveSemantic('lsp.diagnostic_info')}" }`);
+  luaLines.push(`  highlights.DiagnosticHint = { fg = "${resolveSemantic('lsp.diagnostic_hint')}" }`);
+  luaLines.push(`  highlights.DiagnosticSignError = { fg = "${resolveSemantic('lsp.diagnostic_error')}" }`);
+  luaLines.push(`  highlights.DiagnosticSignWarn = { fg = "${resolveSemantic('lsp.diagnostic_warn')}" }`);
+  luaLines.push(`  highlights.DiagnosticSignInfo = { fg = "${resolveSemantic('lsp.diagnostic_info')}" }`);
+  luaLines.push(`  highlights.DiagnosticSignHint = { fg = "${resolveSemantic('lsp.diagnostic_hint')}" }`);
+  luaLines.push(`  highlights.DiagnosticUnderlineError = { underline = true, sp = "${resolveSemantic('lsp.diagnostic_error')}" }`);
+  luaLines.push(`  highlights.DiagnosticUnderlineWarn = { underline = true, sp = "${resolveSemantic('lsp.diagnostic_warn')}" }`);
+  luaLines.push(`  highlights.DiagnosticUnderlineInfo = { underline = true, sp = "${resolveSemantic('lsp.diagnostic_info')}" }`);
+  luaLines.push(`  highlights.DiagnosticUnderlineHint = { underline = true, sp = "${resolveSemantic('lsp.diagnostic_hint')}" }`);
+
+  luaLines.push('');
+  luaLines.push('  -- UI elements');
+  luaLines.push(`  highlights.Pmenu = { fg = "${resolveSemantic('ui_elements.menu_fg')}", bg = "${resolveSemantic('ui_elements.menu_bg')}" }`);
+  luaLines.push(`  highlights.PmenuSel = { fg = "${resolveSemantic('editor.background')}", bg = "${resolveSemantic('ui_elements.menu_selection')}" }`);
+  luaLines.push(`  highlights.PmenuSbar = { bg = "${resolveSemantic('ui_elements.menu_sbar')}" }`);
+  luaLines.push(`  highlights.PmenuThumb = { bg = "${resolveSemantic('ui_elements.menu_thumb')}" }`);
+  luaLines.push(`  highlights.StatusLine = { fg = "${resolveSemantic('ui_elements.menu_fg')}", bg = "${resolveSemantic('ui_elements.status_line')}" }`);
+  luaLines.push(`  highlights.StatusLineNC = { fg = "${resolveSemantic('syntax.comment')}", bg = "${resolveSemantic('ui_elements.status_line_nc')}" }`);
+  luaLines.push(`  highlights.TabLine = { fg = "${resolveSemantic('syntax.comment')}", bg = "${resolveSemantic('ui_elements.tab_line')}" }`);
+  luaLines.push(`  highlights.TabLineFill = { bg = "${resolveSemantic('ui_elements.tab_line_fill')}" }`);
+  luaLines.push(`  highlights.TabLineSel = { fg = "${resolveSemantic('editor.foreground')}", bg = "${resolveSemantic('ui_elements.tab_line_sel')}" }`);
+  luaLines.push(`  highlights.WinSeparator = { fg = "${resolveSemantic('ui_elements.window_separator')}" }`);
+  luaLines.push(`  highlights.VertSplit = { fg = "${resolveSemantic('ui_elements.vert_split')}" }`);
+  luaLines.push(`  highlights.Folded = { fg = "${resolveSemantic('syntax.comment')}", bg = "${resolveSemantic('ui_elements.folded')}" }`);
+  luaLines.push(`  highlights.FoldColumn = { fg = "${resolveSemantic('ui_elements.fold_column')}" }`);
+  luaLines.push(`  highlights.SignColumn = { fg = "${resolveSemantic('ui_elements.sign_column')}", bg = options.transparent and palette.none or "${resolveSemantic('editor.background')}" }`);
+  luaLines.push(`  highlights.Directory = { fg = "${resolveSemantic('ui_elements.directory')}" }`);
+  luaLines.push(`  highlights.Title = { fg = "${resolveSemantic('ui_elements.title')}", bold = true }`);
+  luaLines.push(`  highlights.ErrorMsg = { fg = "${resolveSemantic('ui_elements.error_msg')}" }`);
+  luaLines.push(`  highlights.WarningMsg = { fg = "${resolveSemantic('ui_elements.warning_msg')}" }`);
+  luaLines.push(`  highlights.Question = { fg = "${resolveSemantic('ui_elements.question')}" }`);
+  luaLines.push(`  highlights.MoreMsg = { fg = "${resolveSemantic('ui_elements.more_msg')}" }`);
+  luaLines.push(`  highlights.ModeMsg = { fg = "${resolveSemantic('ui_elements.mode_msg')}" }`);
+
+  luaLines.push('');
+  luaLines.push('  -- Terminal colors');
+  luaLines.push('  if options.terminal_colors then');
+  luaLines.push(`    vim.g.terminal_color_0 = "${resolveColor('ansi.black')}"`);
+  luaLines.push(`    vim.g.terminal_color_1 = "${resolveColor('ansi.red')}"`);
+  luaLines.push(`    vim.g.terminal_color_2 = "${resolveColor('ansi.green')}"`);
+  luaLines.push(`    vim.g.terminal_color_3 = "${resolveColor('ansi.yellow')}"`);
+  luaLines.push(`    vim.g.terminal_color_4 = "${resolveColor('ansi.blue')}"`);
+  luaLines.push(`    vim.g.terminal_color_5 = "${resolveColor('ansi.magenta')}"`);
+  luaLines.push(`    vim.g.terminal_color_6 = "${resolveColor('ansi.cyan')}"`);
+  luaLines.push(`    vim.g.terminal_color_7 = "${resolveColor('ansi.white')}"`);
+  luaLines.push(`    vim.g.terminal_color_8 = "${resolveColor('bright.black')}"`);
+  luaLines.push(`    vim.g.terminal_color_9 = "${resolveColor('bright.red')}"`);
+  luaLines.push(`    vim.g.terminal_color_10 = "${resolveColor('bright.green')}"`);
+  luaLines.push(`    vim.g.terminal_color_11 = "${resolveColor('bright.yellow')}"`);
+  luaLines.push(`    vim.g.terminal_color_12 = "${resolveColor('bright.blue')}"`);
+  luaLines.push(`    vim.g.terminal_color_13 = "${resolveColor('bright.magenta')}"`);
+  luaLines.push(`    vim.g.terminal_color_14 = "${resolveColor('bright.cyan')}"`);
+  luaLines.push(`    vim.g.terminal_color_15 = "${resolveColor('bright.white')}"`);
+  luaLines.push('  end');
 
   luaLines.push('');
   luaLines.push('  return highlights');
@@ -286,8 +460,8 @@ function generateNeovimHighlights(): string {
   return luaLines.join('\n');
 }
 
-// Ensure output directories exist
-const outputDir = path.join(__dirname, '../generated/lua/aardvark-blue');
+// Ensure output directories exist  
+const outputDir = path.join(__dirname, '../lua/aardvark-blue');
 fs.mkdirSync(outputDir, { recursive: true });
 
 // Generate files
@@ -301,4 +475,4 @@ const highlightsContent = generateNeovimHighlights();
 fs.writeFileSync(path.join(outputDir, 'highlights.lua'), highlightsContent);
 console.log('✓ Generated highlights.lua');
 
-console.log('\\nGeneration complete! Files written to generated/lua/aardvark-blue/');
+console.log('\\nGeneration complete! Files written to lua/aardvark-blue/');

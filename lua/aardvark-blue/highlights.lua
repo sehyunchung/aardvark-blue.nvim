@@ -169,6 +169,21 @@ function M.setup(palette, options)
   highlights.MoreMsg = { fg = palette.cyan }
   highlights.ModeMsg = { fg = palette.cyan }
 
+  -- Telescope
+  highlights.TelescopeNormal = { fg = palette.fg, bg = palette.bg }
+  highlights.TelescopeBorder = { fg = palette.border, bg = palette.bg }
+  highlights.TelescopeTitle = { fg = palette.bright_cyan, bold = true }
+  highlights.TelescopePromptTitle = { fg = palette.bright_yellow, bold = true }
+  highlights.TelescopeResultsTitle = { fg = palette.bright_blue, bold = true }
+  highlights.TelescopePreviewTitle = { fg = palette.bright_green, bold = true }
+  highlights.TelescopePromptNormal = { fg = palette.fg, bg = palette.bg_dark }
+  highlights.TelescopePromptBorder = { fg = palette.border, bg = palette.bg_dark }
+  highlights.TelescopePromptPrefix = { fg = palette.bright_cyan }
+  highlights.TelescopeSelection = { fg = palette.bright_white, bg = palette.bg_light }
+  highlights.TelescopeSelectionCaret = { fg = palette.bright_yellow, bg = palette.bg_light }
+  highlights.TelescopeMultiSelection = { fg = palette.bright_yellow, bg = palette.bg_light }
+  highlights.TelescopeMatching = { fg = palette.bright_yellow, bold = true }
+
   -- Terminal colors
   if options.terminal_colors then
     vim.g.terminal_color_0 = palette.black

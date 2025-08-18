@@ -59,6 +59,31 @@ The theme uses a carefully curated palette based on Ghostty's Aardvark Blue:
 
 ### TypeScript
 
+![TypeScript Example](https://github.com/sehyunchung/aardvark-blue.nvim/assets/19919621/typescript-demo.png)
+
+Features highlighted in this example:
+- **Interface keywords** (`interface`) in magenta
+- **Access modifiers** (`readonly`, `private`, `public`) in yellow  
+- **Type annotations** (`User`, `number`, `string`) in bright cyan
+- **Class keywords** (`class`, `constructor`) in magenta
+- **Function names** (`createUser`, `validateUser`) in yellow
+- **String literals** in bright green
+- **Async/await** keywords in magenta
+
+### React/JSX
+
+![React TSX Example](https://github.com/sehyunchung/aardvark-blue.nvim/assets/19919621/react-demo.png)
+
+Features highlighted in this example:
+- **React Components** (`UserCard`, custom components) in bright blue
+- **HTML Tags** (`div`, `header`, `span`) in blue
+- **JSX Attributes** (`className`, `onClick`, `data-testid`) in bright yellow
+- **React Hooks** (`useState`, `useCallback`, `useEffect`) in yellow
+- **TypeScript generics** and interfaces
+- **Template literals** and expressions in JSX
+
+### Additional Examples
+
 ```typescript
 // Interface and type definitions
 interface User {
@@ -76,8 +101,6 @@ export class UserService {   // export/class keywords in magenta
   }
 }
 ```
-
-### React/JSX
 
 ```jsx
 // React component showing color distinction

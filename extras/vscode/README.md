@@ -59,7 +59,7 @@ The theme uses a carefully curated palette based on Ghostty's Aardvark Blue:
 
 ### TypeScript
 
-![TypeScript Example](https://github.com/sehyunchung/aardvark-blue.nvim/assets/19919621/typescript-demo.png)
+![TypeScript Example](../../assets/typescript-demo.png)
 
 Features highlighted in this example:
 - **Interface keywords** (`interface`) in magenta
@@ -72,7 +72,7 @@ Features highlighted in this example:
 
 ### React/JSX
 
-![React TSX Example](https://github.com/sehyunchung/aardvark-blue.nvim/assets/19919621/react-demo.png)
+![React TSX Example](../../assets/react-demo.png)
 
 Features highlighted in this example:
 - **React Components** (`UserCard`, custom components) in bright blue

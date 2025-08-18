@@ -21,8 +21,8 @@ function M.setup(palette, options)
   highlights.CursorColumn = { bg = palette.cursor_line }
   highlights.ColorColumn = { bg = palette.bg_light }
   highlights.Cursor = { fg = palette.bg, bg = palette.cursor }
-  highlights.Visual = { bg = palette.visual }
-  highlights.VisualNOS = { bg = palette.visual }
+  highlights.Visual = { fg = palette.bright_white, bg = palette.visual }
+  highlights.VisualNOS = { fg = palette.bright_white, bg = palette.visual }
   highlights.Search = { fg = palette.bg, bg = palette.search }
   highlights.IncSearch = { fg = palette.bg, bg = palette.bright_yellow }
   highlights.CurSearch = { fg = palette.bg, bg = palette.bright_yellow }

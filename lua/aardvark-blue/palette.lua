@@ -39,7 +39,7 @@ local palette = {
 -- Additional semantic colors
 palette.none = "NONE"
 palette.fold = palette.bg_light
-palette.visual = palette.selection
+palette.visual = "#0a4080"
 palette.search = palette.bright_yellow
 palette.line_number = palette.comment
 palette.cursor_line = palette.bg_light

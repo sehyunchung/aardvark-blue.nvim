@@ -1,16 +1,33 @@
 # 🦫 aardvark-blue.nvim
 
-A modern Neovim colorscheme inspired by the Aardvark Blue terminal theme. Features a deep blue background with carefully balanced syntax highlighting for optimal readability and reduced eye strain. Enhanced with specialized TypeScript/React support and comprehensive TreeSitter integration.
+A **professional theme collection** for Neovim and VS Code inspired by Ghostty's Aardvark Blue terminal theme. Features a **platform-agnostic JSON color management system** that generates consistent themes across editors, with **3 VS Code variants** and enhanced TypeScript/JSX support.
+
+> 🎯 **New in v2.0.0**: Platform-agnostic architecture with JSON-based color management, 3 VS Code theme variants, and comprehensive semantic token highlighting!
 
 ## ✨ Features
 
-- 🎨 **Beautiful color palette** - Deep blue background (#102040) with vibrant accent colors
-- 🌳 **Enhanced TreeSitter support** - Full semantic highlighting for modern syntax
-- 💙 **TypeScript & React optimized** - Specialized highlighting for TS/TSX/JSX with component distinction
-- 🔧 **LSP integration** - Diagnostic and reference highlighting with semantic tokens
-- ⚙️ **Customizable** - Configure transparency, styles, and terminal colors
-- 📦 **Plugin ready** - Easy installation with popular plugin managers
-- 🎯 **Language-aware** - Optimized syntax highlighting for multiple programming languages
+### 🚀 **Multi-Platform Support**
+- **🦫 Neovim**: Full-featured colorscheme with TreeSitter and LSP integration
+- **💙 VS Code**: 3 distinct variants (Default, High Contrast, Minimal)
+- **🎨 Consistent colors**: Identical color mapping across all platforms via JSON configuration
+
+### 🔧 **v2.0.0 Architecture**
+- **📁 JSON-based configuration**: All colors defined in structured `colors/*.json` files
+- **🤖 Auto-generated themes**: TypeScript build system with validation
+- **🔄 Platform-agnostic**: Single source generates Neovim + VS Code themes
+- **✅ Quality assured**: Pre-commit hooks with comprehensive validation
+
+### 🎨 **Superior Syntax Highlighting**
+- **🌳 Enhanced TreeSitter support** - Full semantic highlighting for modern syntax
+- **💙 TypeScript & React mastery** - Complete TS/TSX/JSX with semantic tokens
+- **🔧 LSP integration** - Diagnostic and reference highlighting
+- **🎯 50+ languages** - Universal syntax highlighting excellence
+
+### ⚙️ **Customization & Quality**
+- **📝 Developer-friendly**: Easy color customization via JSON editing
+- **🔒 Type-safe generation** - TypeScript with comprehensive error handling
+- **📦 Plugin ready** - Compatible with all popular plugin managers
+- **♿ Accessibility** - WCAG-compliant contrast ratios
 
 ## 🎨 Color Palette
 
@@ -64,6 +81,8 @@ A modern Neovim colorscheme inspired by the Aardvark Blue terminal theme. Featur
 
 ## 📦 Installation
 
+## 🦫 Neovim Installation
+
 ### Using [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
@@ -98,6 +117,27 @@ Then in your `init.vim` or `init.lua`:
 ```lua
 colorscheme aardvark-blue
 ```
+
+## 💙 VS Code Installation
+
+### Via VS Code Marketplace
+1. Open VS Code
+2. Go to Extensions (`Ctrl+Shift+X`)
+3. Search **"Aardvark Blue"**
+4. Install the theme extension
+
+### Manual Installation
+1. Download `aardvark-blue-theme-2.0.0.vsix` from [releases](https://github.com/sehyunchung/aardvark-blue.nvim/releases)
+2. Install via command: `code --install-extension aardvark-blue-theme-2.0.0.vsix`
+3. Restart VS Code
+
+### 🎨 Theme Selection
+After installation, choose your preferred variant:
+- **Aardvark Blue** (default) - Perfect balance for daily coding
+- **Aardvark Blue High Contrast** - Enhanced contrast for accessibility  
+- **Aardvark Blue Minimal** - Subtle colors for distraction-free coding
+
+Access via: `Preferences → Color Theme` or `Ctrl+K Ctrl+T`
 
 ## 🖼️ Preview
 
@@ -213,9 +253,79 @@ vim.cmd.colorscheme("aardvark-blue")
 - **Semantic tokens** - Enhanced syntax from language servers
 - **Hover highlights** - Documentation and signature help styling
 
+## 🖼️ Screenshots
+
+### TypeScript Development
+![TypeScript Demo](./assets/typescript-demo.png)
+
+### React/JSX Development  
+![React Demo](./assets/react-demo.png)
+
+## 🔧 Development & Customization
+
+### v2.0.0 JSON Color System
+
+This theme uses a **platform-agnostic JSON color management system**. All colors are defined in structured JSON files:
+
+```
+colors/
+├── palette.json           # Base color definitions
+├── semantic.json          # Semantic color mappings  
+├── vscode-tokens.json     # Token group definitions
+└── color-assignments.json # Swappable semantic roles
+```
+
+### Customizing Colors
+
+1. **Edit JSON configuration**:
+   ```bash
+   # Edit base colors
+   vim colors/palette.json
+   
+   # Edit semantic mappings  
+   vim colors/semantic.json
+   
+   # Modify token assignments
+   vim colors/color-assignments.json
+   ```
+
+2. **Regenerate themes**:
+   ```bash
+   npm run generate
+   ```
+
+3. **Validate changes**:
+   ```bash
+   npm run validate
+   ```
+
+### Build System
+
+The theme uses a **TypeScript build system** with:
+- 🔒 **Type safety** - Comprehensive error handling
+- ✅ **Validation** - JSON schema validation  
+- 🔄 **Auto-generation** - Consistent cross-platform output
+- 🪝 **Git hooks** - Pre-commit validation
+
+```bash
+# Available commands
+npm run generate        # Generate all themes
+npm run validate       # Validate JSON + generated files  
+npm run typecheck      # TypeScript compilation check
+npm run setup-hooks    # Install git hooks
+```
+
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit issues and pull requests.
+Contributions are welcome! The new JSON-based system makes it easy to contribute color improvements:
+
+1. Fork the repository
+2. Edit JSON files in `colors/` directory
+3. Run `npm run generate` to build themes
+4. Test in both Neovim and VS Code
+5. Submit a pull request
+
+For bug reports and feature requests, please use [GitHub Issues](https://github.com/sehyunchung/aardvark-blue.nvim/issues).
 
 ## 📄 License
 

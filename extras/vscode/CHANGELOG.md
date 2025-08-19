@@ -45,6 +45,46 @@ All notable changes to the "Aardvark Blue Theme" extension will be documented in
 - Function names now use regular yellow (#dbba00) instead of bright yellow for better balance with white variables
 - Type declaration keywords explicitly scoped to ensure proper magenta coloring
 
+## [2.0.0] - 2025-08-19
+
+### 🚀 Major Release: Multi-Variant Collection with Platform-Agnostic Architecture
+
+#### Added
+- **3 distinct theme variants**: Default, High Contrast, and Minimal
+- **Platform-agnostic JSON color management**: All colors defined in structured JSON files
+- **Auto-generated consistency**: TypeScript build system with comprehensive validation
+- **Cross-platform sync**: Identical color mapping with Neovim version
+- **Enhanced TypeScript/React support**: Improved semantic token highlighting
+- **Pre-commit validation**: Git hooks ensuring theme consistency
+
+#### New Theme Variants
+- **Aardvark Blue** (Default) - Perfect balance for daily coding
+- **Aardvark Blue High Contrast** - Enhanced contrast for accessibility 
+- **Aardvark Blue Minimal** - Subtle colors for distraction-free coding
+
+#### Enhanced Features
+- **Semantic token support**: Intelligent context-aware highlighting
+- **Advanced TypeScript highlighting**: Complete support for interfaces, generics, decorators
+- **React/JSX mastery**: Component tags, HTML elements, attributes perfectly distinguished
+- **50+ language support**: Universal syntax highlighting coverage
+- **WCAG-compliant accessibility**: Proper contrast ratios across all variants
+
+#### Technical Improvements
+- **JSON-based configuration**: colors/palette.json, colors/semantic.json, etc.
+- **Type-safe generation**: Comprehensive error handling with TypeScript
+- **Validation system**: JSON schema validation with build-time checks
+- **Auto-generated headers**: All theme files include generation timestamps and warnings
+
+#### Breaking Changes
+- Package now contains 3 separate theme files instead of 1
+- Theme selection requires choosing specific variant from VS Code theme picker
+
+### Migration Guide
+After updating, you'll see 3 theme options in VS Code:
+1. Select "Aardvark Blue" for the default experience
+2. Choose "Aardvark Blue High Contrast" for enhanced accessibility
+3. Pick "Aardvark Blue Minimal" for subtle syntax highlighting
+
 ## [Unreleased]
 
 ### Planned

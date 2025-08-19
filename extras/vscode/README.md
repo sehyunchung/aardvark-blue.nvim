@@ -1,15 +1,36 @@
-# 🦫 Aardvark Blue Theme for VS Code
+# 🦫 Aardvark Blue Theme Collection for VS Code
 
-A deep blue color theme for Visual Studio Code inspired by Ghostty's Aardvark Blue theme. Features carefully balanced syntax highlighting optimized for TypeScript, React, and modern web development.
+**Professional dark theme collection** with **3 distinct variants** inspired by Ghostty's Aardvark Blue. Features comprehensive TypeScript/React syntax highlighting, semantic token support, and consistent cross-platform color mapping.
+
+## 🌟 **Three Theme Variants**
+
+### 🔵 **Aardvark Blue** (Default)
+Perfect balance of colors with optimal readability. Ideal for daily coding across all languages.
+
+### ⚡ **Aardvark Blue High Contrast** 
+Enhanced contrast for better accessibility and reduced eye strain during long coding sessions.
+
+### 🎯 **Aardvark Blue Minimal**
+Subtle color variation focusing on essential syntax elements for distraction-free coding.
 
 ## ✨ Features
 
-- 🎨 **Deep blue background** (#102040) for comfortable coding sessions
-- 🌟 **Optimized for TypeScript & React** - Enhanced syntax highlighting for modern web development
-- 🎯 **Semantic highlighting** - Full support for VS Code's semantic token provider
-- 💙 **Component distinction** - React components vs HTML tags use different blues
-- 🔧 **Comprehensive coverage** - All UI elements themed consistently
-- 📱 **Terminal integration** - Terminal colors match the theme palette
+### 🚀 **v2.0.0 Multi-Variant Collection**
+- **3 distinct themes** - Default, High Contrast, and Minimal variants
+- **Auto-generated consistency** - All variants generated from unified color system
+- **Cross-platform sync** - Consistent colors with Neovim and terminal
+
+### 🎨 **Superior Syntax Highlighting**
+- **TypeScript excellence** - Complete support for interfaces, generics, decorators
+- **React/JSX mastery** - Component tags, HTML elements, attributes perfectly colored
+- **Semantic token support** - Intelligent context-aware highlighting
+- **50+ languages** - Universal syntax highlighting coverage
+
+### 🖥️ **Complete UI Integration**
+- **Deep blue background** (#102040) for comfortable coding sessions
+- **Comprehensive theming** - All UI elements styled consistently
+- **Terminal integration** - Perfect ANSI color matching with terminal
+- **Accessibility friendly** - WCAG-compliant contrast ratios
 
 ## 🎨 Color Philosophy
 
@@ -41,19 +62,33 @@ The theme uses a carefully curated palette based on Ghostty's Aardvark Blue:
 ### From VS Code Marketplace
 
 1. Open VS Code
-2. Go to Extensions (Ctrl+Shift+X / Cmd+Shift+X)
-3. Search for "Aardvark Blue Theme"
+2. Go to Extensions (`Ctrl+Shift+X` / `Cmd+Shift+X`)
+3. Search for **"Aardvark Blue Theme"**
 4. Click Install
-5. Go to File > Preferences > Color Theme and select "Aardvark Blue"
+5. Choose your preferred variant:
+   - **Aardvark Blue** (default)
+   - **Aardvark Blue High Contrast** 
+   - **Aardvark Blue Minimal**
 
-**Or install directly from the marketplace:** [Aardvark Blue Theme](https://marketplace.visualstudio.com/items?itemName=SehyunChung.aardvark-blue-theme)
+**Or install directly:** [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=SehyunChung.aardvark-blue-theme)
+
+### Theme Selection
+
+After installation, access themes via:
+- **Command Palette**: `Ctrl+K Ctrl+T` (or `Cmd+K Cmd+T`)
+- **Settings**: `Preferences → Color Theme`
+
+All 3 variants will be available in your theme list!
 
 ### Manual Installation
 
-1. Download the `.vsix` file from the [releases page](https://github.com/sehyunchung/aardvark-blue.nvim/releases)
-2. Open VS Code
-3. Run `Extensions: Install from VSIX...` from the Command Palette
-4. Select the downloaded `.vsix` file
+1. Download `aardvark-blue-theme-2.0.0.vsix` from [releases](https://github.com/sehyunchung/aardvark-blue.nvim/releases)
+2. Install via command: `code --install-extension aardvark-blue-theme-2.0.0.vsix`  
+3. **Or via VS Code**:
+   - Open VS Code
+   - Run `Extensions: Install from VSIX...` from Command Palette
+   - Select the downloaded `.vsix` file
+4. Restart VS Code and select your preferred variant
 
 ## 🖼️ Screenshots
 

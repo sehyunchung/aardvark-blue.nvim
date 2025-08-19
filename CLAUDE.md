@@ -10,33 +10,95 @@ aardvark-blue.nvim is a Neovim colorscheme plugin inspired by the Aardvark Blue 
 
 ```bash
 aardvark-blue.nvim/
+├── colors/                          # JSON color management (NEW v2.0.0)
+│   ├── palette.json                 # Base color definitions
+│   ├── semantic.json                # Semantic color mappings
+│   ├── vscode-tokens.json           # VS Code token groupings
+│   └── color-assignments.json      # Swappable semantic roles
+├── build/                           # TypeScript build system (NEW v2.0.0)
+│   ├── generate.ts                  # Main theme generator
+│   ├── validate.ts                  # JSON configuration validator
+│   └── validate-generated.ts       # Generated file validator
 ├── colors/
-│   └── aardvark-blue.lua        # Vim colorscheme entry point
-├── lua/aardvark-blue/
-│   ├── init.lua                 # Main colorscheme module
-│   ├── palette.lua              # Color palette definitions
-│   ├── highlights.lua           # Highlight group definitions
-│   └── config.lua               # Configuration options
+│   └── aardvark-blue.lua           # Vim colorscheme entry point
+├── lua/aardvark-blue/              # Generated Neovim files (AUTO-GENERATED)
+│   ├── init.lua                    # Main colorscheme module
+│   ├── palette.lua                 # Color palette (generated from JSON)
+│   ├── highlights.lua              # Highlight groups (generated from JSON)
+│   └── config.lua                  # Configuration options
 ├── doc/
-│   └── aardvark-blue.txt        # Vim help documentation
-└── extras/
-    └── vscode/                  # VS Code theme (vscode-v1.0.1)
+│   └── aardvark-blue.txt           # Vim help documentation
+├── extras/
+│   └── vscode/                     # VS Code theme collection (vscode-v2.0.0)
+│       ├── themes/                 # Generated VS Code themes
+│       │   ├── aardvark-blue-color-theme.json          # Default variant
+│       │   ├── aardvark-blue-high_contrast-color-theme.json # High contrast
+│       │   └── aardvark-blue-minimal-color-theme.json  # Minimal variant
+│       ├── package.json            # VS Code extension manifest
+│       └── *.md                    # VS Code documentation
+├── scripts/                        # Development automation (NEW v2.0.0)
+│   └── setup-git-hooks.sh         # Git hooks installer
+├── .githooks/                      # Pre-commit validation (NEW v2.0.0)
+│   └── pre-commit                  # Automatic validation and generation
+└── backup/                         # Manual file backups (NEW v2.0.0)
+    └── lua/aardvark-blue/         # Pre-v2.0.0 manual files
 ```
 
-## Core Components
+## Core Components (v2.0.0 Architecture)
 
-### Color Palette (palette.lua)
+### JSON Color Management System
 
-- Uses exact color values from Ghostty Aardvark Blue theme
-- Includes both ANSI colors and bright colors
-- Defines semantic colors (error, warning, info, hint)
+**colors/palette.json**: Base color definitions from Ghostty Aardvark Blue theme
+- Exact color values from original theme
+- Structured sections: base, ansi, bright, ui
+- Semantic color definitions (error, warning, info, hint)
 
-### Highlight Definitions (highlights.lua)
+**colors/semantic.json**: Semantic color mappings
+- Maps logical roles to palette colors (syntax.keyword → ansi.magenta)
+- Platform-agnostic color assignments
+- Hierarchical organization (syntax, typescript, jsx, editor, etc.)
 
+**colors/vscode-tokens.json**: VS Code token groupings
+- Groups VS Code scopes by semantic meaning
+- Enables swappable color assignments
+- Supports multiple theme variants
+
+**colors/color-assignments.json**: Swappable semantic roles
+- Maps token groups to semantic roles (callable → accent)
+- Enables easy theme variants (high_contrast, minimal)
+- Maintains consistency across all platforms
+
+### Generated Components (AUTO-GENERATED - DO NOT EDIT)
+
+**lua/aardvark-blue/palette.lua**: Generated Neovim color palette
+- Auto-generated from colors/palette.json
+- Includes computed semantic colors
+- Contains auto-generated header warning
+
+**lua/aardvark-blue/highlights.lua**: Generated highlight definitions
 - **Ghostty 1:1 Matching**: Identical color distribution as terminal
 - TreeSitter support for modern syntax highlighting
 - LSP integration (diagnostics, reference highlights)
 - Plugin compatibility (telescope, nvim-tree, etc.)
+- Generated from colors/semantic.json mappings
+
+### Build System Components
+
+**build/generate.ts**: TypeScript theme generator
+- Type-safe color resolution and validation
+- Multi-platform theme generation (Neovim + VS Code)
+- Comprehensive error handling with detailed messages
+- Supports multiple VS Code theme variants
+
+**build/validate.ts**: JSON configuration validator
+- Validates all JSON color configuration files
+- Checks color reference integrity
+- Ensures consistent structure across files
+
+**build/validate-generated.ts**: Generated file validator  
+- Validates auto-generated theme files
+- Ensures proper headers and structure
+- Checks for completeness and accuracy
 
 ### Special Keyword Handling
 
@@ -85,28 +147,58 @@ The colorscheme leverages specific TreeSitter capture groups for precise syntax 
 - `@tag.attribute.tsx` → Bright Yellow `#ffe763` (for JSX attributes)
 - `@tag.delimiter.tsx` → White `#bebebe` (for JSX brackets)
 
-## Development Guidelines
+## Development Guidelines (v2.0.0)
+
+### 🚨 **IMPORTANT: Auto-Generated Files**
+
+**NEVER directly edit files in `lua/aardvark-blue/` or `extras/vscode/themes/`** - they are auto-generated and will be overwritten!
 
 ### When Changing Colors
 
-1. Check base colors in `palette.lua`
-2. Modify corresponding highlight groups in `highlights.lua`
-3. Update both TreeSitter and default syntax highlighting
-4. Compare with Ghostty terminal to ensure consistency
+1. **Edit JSON configuration**: Modify `colors/palette.json` for base colors
+2. **Edit semantic mappings**: Update `colors/semantic.json` for color roles
+3. **Regenerate themes**: Run `npm run generate` to update all platforms
+4. **Validate changes**: Run `npm run validate` to ensure correctness
+5. **Compare with Ghostty**: Ensure terminal consistency is maintained
 
 ### When Adding New Highlight Groups
 
-1. Choose from existing color palette
-2. Consider both TreeSitter groups and default Vim groups
-3. Use consistent naming conventions
-4. Document purpose with comments
+1. **Add to semantic.json**: Define new semantic color mappings
+2. **Update generator**: Modify `build/generate.ts` if new categories are needed
+3. **Test both platforms**: Verify in both Neovim and VS Code
+4. **Document purpose**: Add comments in JSON files explaining new mappings
 
 ### When Adding Configuration Options
 
-1. Add to defaults in `config.lua`
-2. Use options in `highlights.lua`
-3. Update README.md documentation
-4. Update Vim help documentation
+1. **Modify config.lua**: Add new options (this file is manually maintained)
+2. **Update generator**: Ensure `build/generate.ts` respects new options
+3. **Update documentation**: README.md and Vim help documentation
+4. **Regenerate**: Always run `npm run generate` after changes
+
+### v2.0.0 Build System Workflow
+
+```bash
+# 1. Edit JSON configuration files
+vim colors/palette.json        # Base colors
+vim colors/semantic.json       # Semantic mappings
+vim colors/color-assignments.json # Theme variants
+
+# 2. Regenerate all themes
+npm run generate               # Generate Neovim + VS Code themes
+
+# 3. Validate everything
+npm run validate              # Validate JSON + generated files
+npm run typecheck            # TypeScript compilation check
+
+# 4. Test changes
+# - Test in Neovim with local directory
+# - Test VS Code themes via F5 (Extension Development Host)
+# - Compare with Ghostty terminal
+
+# 5. Commit (automatic validation via pre-commit hooks)
+git add colors/ lua/ extras/
+git commit -m "feat: your changes"
+```
 
 ## Testing Guide
 
@@ -123,14 +215,20 @@ The colorscheme leverages specific TreeSitter capture groups for precise syntax 
 }
 ```
 
-### Color Verification
+### Color Verification (v2.0.0)
 
-1. Test various language files (Zig, Lua, JavaScript, TypeScript, TSX, etc.)
-2. Compare side-by-side with Ghostty terminal
-3. Verify both TreeSitter and default syntax highlighting
-4. Test LSP features (errors, warnings, references)
-5. Verify TypeScript-specific syntax (interfaces, generics, decorators)
-6. Test JSX/TSX component rendering and attribute highlighting
+1. **JSON Configuration**: Validate via `npm run validate:json`
+2. **Generated Files**: Verify with `npm run validate:generated`  
+3. **Multi-platform testing**:
+   - Test Neovim with various language files (TypeScript, React, Rust, etc.)
+   - Test all 3 VS Code variants (Default, High Contrast, Minimal)
+   - Compare side-by-side with Ghostty terminal
+4. **Feature verification**:
+   - TreeSitter and default syntax highlighting
+   - LSP features (errors, warnings, references, semantic tokens)
+   - TypeScript-specific syntax (interfaces, generics, decorators) 
+   - JSX/TSX component rendering and attribute highlighting
+5. **Cross-platform consistency**: Ensure identical colors across Neovim and VS Code
 
 ## Plugin Distribution
 
@@ -138,15 +236,20 @@ The colorscheme leverages specific TreeSitter capture groups for precise syntax 
 
 **Versioning Scheme:**
 
-- Neovim plugin: `nvim-v1.0.0`, `nvim-v1.1.0`, etc.
-- VS Code theme: `vscode-v1.0.0`, `vscode-v1.1.0`, etc.
+- Neovim plugin: `nvim-v2.0.0`, `nvim-v2.1.0`, etc.
+- VS Code theme: `vscode-v2.0.0`, `vscode-v2.1.0`, etc.
 
-**Release Process:**
+**v2.0.0 Release Process:**
 
-1. Create prefixed version tags for appropriate product
-2. Write release notes
-3. Add screenshots (README.md)
-4. Verify plugin manager compatibility
+1. **Validate and generate**: `npm run validate && npm run generate`
+2. **Update VS Code package**: Update `extras/vscode/package.json` version
+3. **Build VS Code extension**: `cd extras/vscode && npm run package`
+4. **Create prefixed tags**: `git tag nvim-v2.0.0 && git tag vscode-v2.0.0`
+5. **Push with tags**: `git push origin main --tags`
+6. **Create GitHub releases** with appropriate assets:
+   - Neovim: Platform-agnostic JSON system features
+   - VS Code: Include `.vsix` file with all 3 variants
+7. **Update documentation**: Ensure all docs reflect v2.0.0 features
 
 ### Plugin Manager Support
 

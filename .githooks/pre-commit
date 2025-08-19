@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# Pre-commit hook for aardvark-blue.nvim
+# Ensures that generated files are up-to-date and valid
+
+set -e
+
+echo "Running pre-commit validation..."
+
+# Check if we have Node.js and npm available
+if ! command -v npm >/dev/null 2>&1; then
+    echo "Error: npm is required but not installed"
+    exit 1
+fi
+
+# Run validation
+echo "🔍 Validating JSON configuration files..."
+npm run validate:json
+
+echo "🔧 Checking TypeScript compilation..."
+npm run typecheck
+
+# Check if any JSON config files are staged
+json_files_staged=$(git diff --cached --name-only | grep -E '^colors/.*\.json$' || true)
+
+if [ -n "$json_files_staged" ]; then
+    echo "📝 JSON configuration files changed, regenerating themes..."
+    npm run generate
+    
+    echo "✅ Validating generated files..."
+    npm run validate:generated
+    
+    # Add generated files to the commit
+    git add lua/aardvark-blue/*.lua
+    git add extras/vscode/themes/*.json
+    
+    echo "✅ Generated files updated and added to commit"
+fi
+
+echo "✅ Pre-commit validation passed!"

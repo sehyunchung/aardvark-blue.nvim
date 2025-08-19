@@ -1,0 +1,104 @@
+{
+  "semantic_roles": {
+    "primary": {
+      "description": "Main actions, focus elements",
+      "palette_ref": "bright.blue"
+    },
+    "secondary": {
+      "description": "Supporting elements, operators",
+      "palette_ref": "ansi.cyan"
+    },
+    "accent": {
+      "description": "Emphasis, important callables",
+      "palette_ref": "bright.yellow"
+    },
+    "success": {
+      "description": "Success states, strings, growth",
+      "palette_ref": "bright.green"
+    },
+    "warning": {
+      "description": "Warnings, attention needed",
+      "palette_ref": "bright.yellow"
+    },
+    "danger": {
+      "description": "Errors, destructive actions",
+      "palette_ref": "bright.red"
+    },
+    "muted": {
+      "description": "Secondary text, comments",
+      "palette_ref": "ui.comment"
+    },
+    "neutral": {
+      "description": "Default text, variables",
+      "palette_ref": "base.fg"
+    },
+    "structure": {
+      "description": "Types, definitions, architecture",
+      "palette_ref": "bright.cyan"
+    },
+    "control": {
+      "description": "Control flow, keywords",
+      "palette_ref": "ansi.magenta"
+    },
+    "data": {
+      "description": "Numbers, literals, data",
+      "palette_ref": "bright.blue"
+    },
+    "modifier": {
+      "description": "Modifiers, qualifiers",
+      "palette_ref": "ansi.yellow"
+    }
+  },
+  
+  "assignments": {
+    "callable": "accent",
+    "data": "neutral", 
+    "structure": "structure",
+    "control": "control",
+    "modifier": "modifier",
+    "emphasis": "success",
+    "operator": "secondary",
+    "jsx_element": "primary",
+    "jsx_builtin": "control",
+    "jsx_attribute": "accent",
+    "comment": "muted",
+    "constant": "danger"
+  },
+  
+  "alternative_assignments": {
+    "high_contrast": {
+      "description": "Higher contrast color scheme",
+      "assignments": {
+        "callable": "primary",
+        "data": "muted",
+        "structure": "accent", 
+        "control": "control",
+        "modifier": "warning",
+        "emphasis": "success",
+        "operator": "secondary",
+        "jsx_element": "accent",
+        "jsx_builtin": "structure",
+        "jsx_attribute": "warning",
+        "comment": "muted",
+        "constant": "danger"
+      }
+    },
+    "minimal": {
+      "description": "Minimal color variation",
+      "assignments": {
+        "callable": "accent",
+        "data": "neutral",
+        "structure": "neutral", 
+        "control": "control",
+        "modifier": "control",
+        "emphasis": "success",
+        "operator": "neutral",
+        "jsx_element": "accent",
+        "jsx_builtin": "control",
+        "jsx_attribute": "success",
+        "comment": "muted",
+        "constant": "accent"
+      }
+    }
+  }
+}

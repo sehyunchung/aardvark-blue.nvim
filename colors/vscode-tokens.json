@@ -1,0 +1,163 @@
+{
+  "token_groups": {
+    "callable": {
+      "description": "Functions, methods, and callable variables",
+      "tokens": [
+        "entity.name.function",
+        "entity.name.function.ts",
+        "entity.name.function.tsx",
+        "support.function",
+        "support.function.ts",
+        "support.function.tsx",
+        "variable:callable",
+        "variable.declaration:callable",
+        "property:callable",
+        "meta.function-call",
+        "meta.function-call.ts",
+        "meta.function-call.tsx",
+        "entity.name.function.member",
+        "entity.name.method",
+        "entity.name.method.ts",
+        "entity.name.method.tsx"
+      ]
+    },
+    "data": {
+      "description": "Variables, parameters, and data containers",
+      "tokens": [
+        "variable",
+        "variable.declaration", 
+        "variable.other.readwrite",
+        "parameter",
+        "variable.parameter",
+        "property"
+      ]
+    },
+    "structure": {
+      "description": "Types, classes, interfaces, and architectural elements",
+      "tokens": [
+        "entity.name.type",
+        "entity.name.type.ts",
+        "entity.name.type.tsx",
+        "entity.name.type.class",
+        "entity.name.type.class.ts",
+        "entity.name.type.class.tsx",
+        "entity.name.type.interface",
+        "entity.name.type.interface.ts", 
+        "entity.name.type.interface.tsx",
+        "support.type",
+        "support.type.ts",
+        "support.type.tsx",
+        "storage.type.class",
+        "storage.type.class.ts",
+        "storage.type.class.tsx",
+        "variable.declaration:type",
+        "entity.other.inherited-class",
+        "entity.name.namespace",
+        "entity.name.namespace.ts",
+        "entity.name.namespace.tsx"
+      ]
+    },
+    "control": {
+      "description": "Keywords and control flow elements",
+      "tokens": [
+        "keyword",
+        "keyword.control",
+        "keyword.control.conditional",
+        "keyword.control.loop",
+        "keyword.control.flow",
+        "keyword.other.interface",
+        "keyword.other.interface.ts",
+        "keyword.other.interface.tsx",
+        "storage.type.interface",
+        "storage.type.interface.ts",
+        "storage.type.interface.tsx",
+        "storage.type",
+        "storage.type.ts",
+        "storage.type.tsx",
+        "storage.modifier",
+        "storage.modifier.ts",
+        "storage.modifier.tsx",
+        "keyword.other.type",
+        "keyword.other.type.ts",
+        "keyword.other.type.tsx",
+        "keyword.other.enum",
+        "keyword.other.enum.ts",
+        "keyword.other.enum.tsx",
+        "keyword.interface",
+        "keyword.interface.ts",
+        "keyword.interface.tsx"
+      ]
+    },
+    "modifier": {
+      "description": "Access modifiers and qualifiers",
+      "tokens": [
+        "storage.modifier.access",
+        "storage.modifier.async",
+        "storage.modifier.static",
+        "keyword.other.readonly",
+        "storage.modifier.ts"
+      ]
+    },
+    "emphasis": {
+      "description": "Strings, literals, and emphasized content",
+      "tokens": [
+        "string",
+        "string.quoted",
+        "constant.numeric",
+        "constant.language",
+        "meta.string"
+      ]
+    },
+    "operator": {
+      "description": "Operators and symbols",
+      "tokens": [
+        "keyword.operator",
+        "keyword.operator.arithmetic", 
+        "keyword.operator.comparison",
+        "keyword.operator.logical",
+        "punctuation.accessor"
+      ]
+    },
+    "jsx_element": {
+      "description": "JSX/React components and elements",
+      "tokens": [
+        "entity.name.tag.tsx",
+        "entity.name.tag.jsx",
+        "support.class.component.tsx",
+        "support.class.component.jsx"
+      ]
+    },
+    "jsx_builtin": {
+      "description": "HTML elements in JSX",
+      "tokens": [
+        "entity.name.tag.html.tsx",
+        "entity.name.tag.html.jsx"
+      ]
+    },
+    "jsx_attribute": {
+      "description": "JSX attributes and props",
+      "tokens": [
+        "entity.other.attribute-name.tsx",
+        "entity.other.attribute-name.jsx"
+      ]
+    },
+    "comment": {
+      "description": "Comments and documentation",
+      "tokens": [
+        "comment",
+        "comment.line",
+        "comment.block",
+        "punctuation.definition.comment"
+      ]
+    },
+    "constant": {
+      "description": "Constants and immutable values",
+      "tokens": [
+        "constant",
+        "constant.other",
+        "variable.other.constant",
+        "support.constant"
+      ]
+    }
+  }
+}

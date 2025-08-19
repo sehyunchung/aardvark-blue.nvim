@@ -94,7 +94,7 @@ All 3 variants will be available in your theme list!
 
 ### TypeScript
 
-![TypeScript Example](../../assets/typescript-demo.png)
+![TypeScript Example](./assets/typescript-demo.png)
 
 Features highlighted in this example:
 - **Interface keywords** (`interface`) in magenta
@@ -107,7 +107,7 @@ Features highlighted in this example:
 
 ### React/JSX
 
-![React TSX Example](../../assets/react-demo.png)
+![React TSX Example](./assets/react-demo.png)
 
 Features highlighted in this example:
 - **React Components** (`UserCard`, custom components) in bright blue

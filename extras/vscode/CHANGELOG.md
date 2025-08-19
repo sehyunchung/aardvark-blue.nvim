@@ -85,6 +85,18 @@ After updating, you'll see 3 theme options in VS Code:
 2. Choose "Aardvark Blue High Contrast" for enhanced accessibility
 3. Pick "Aardvark Blue Minimal" for subtle syntax highlighting
 
+## [2.0.1] - 2025-08-19
+
+### Fixed
+- **Screenshot display issue**: Fixed VS Code Marketplace screenshot rendering
+- **Asset packaging**: Added screenshot images to extension package
+- **Documentation paths**: Updated image references to use local assets
+
+### Technical
+- Screenshots now properly display on VS Code Marketplace
+- Extension package includes assets folder with demo images
+- Image paths updated from relative `../../assets/` to local `./assets/`
+
 ## [Unreleased]
 
 ### Planned

@@ -1,8 +1,8 @@
 #!/usr/bin/env tsx
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -65,14 +65,37 @@ interface SemanticColors {
   diagnostics: Record<string, string>;
 }
 
+interface TokenGroup {
+  description: string;
+  tokens: string[];
+}
+
+interface VSCodeTokens {
+  token_groups: Record<string, TokenGroup>;
+}
+
+interface SemanticRole {
+  description: string;
+  palette_ref: string;
+}
+
+interface ColorAssignments {
+  semantic_roles: Record<string, SemanticRole>;
+  assignments: Record<string, string>;
+  alternative_assignments: Record<string, {
+    description: string;
+    assignments: Record<string, string>;
+  }>;
+}
+
 // Utility type for nested object traversal
 type NestedValue = string | Record<string, any>;
 
 // Load color definitions
 const palette: ColorPalette = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/palette.json'), 'utf8'));
 const semantic: SemanticColors = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/semantic.json'), 'utf8'));
-const vscodeTokens = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/vscode-tokens.json'), 'utf8'));
-const colorAssignments = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/color-assignments.json'), 'utf8'));
+const vscodeTokens: VSCodeTokens = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/vscode-tokens.json'), 'utf8'));
+const colorAssignments: ColorAssignments = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/color-assignments.json'), 'utf8'));
 
 // Color resolver - resolves semantic references to actual hex values
 function resolveColor(colorRef: string): string {

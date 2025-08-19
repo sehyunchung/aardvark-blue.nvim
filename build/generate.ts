@@ -42,6 +42,7 @@ interface ColorPalette {
   ui: {
     bg_dark: string;
     bg_light: string;
+    bg_darker: string;
     border: string;
     comment: string;
     error: string;
@@ -264,6 +265,7 @@ function generateNeovimPalette(): string {
     '  -- UI colors (derived from palette)',
     `  bg_dark = "${palette.ui.bg_dark}",`,
     `  bg_light = "${palette.ui.bg_light}",`,
+    `  bg_darker = "${palette.ui.bg_darker}",`,
     `  border = "${palette.ui.border}",`,
     `  comment = "${palette.ui.comment}",`,
     `  error = "${palette.ui.error}",`,
@@ -526,6 +528,20 @@ function generateNeovimHighlights(): string {
   luaLines.push(`  highlights.DiagnosticUnderlineWarn = { underline = true, sp = "${resolveSemantic('lsp.diagnostic_warn')}" }`);
   luaLines.push(`  highlights.DiagnosticUnderlineInfo = { underline = true, sp = "${resolveSemantic('lsp.diagnostic_info')}" }`);
   luaLines.push(`  highlights.DiagnosticUnderlineHint = { underline = true, sp = "${resolveSemantic('lsp.diagnostic_hint')}" }`);
+
+  luaLines.push('');
+  luaLines.push('  -- Telescope plugin highlights');
+  luaLines.push(`  highlights.TelescopeBorder = { fg = "${resolveSemantic('plugins.telescope.border')}" }`);
+  luaLines.push(`  highlights.TelescopeNormal = { fg = "${resolveSemantic('plugins.telescope.normal')}" }`);
+  luaLines.push(`  highlights.TelescopeSelection = { bg = "${resolveSemantic('plugins.telescope.selection')}" }`);
+  luaLines.push(`  highlights.TelescopeSelectionCaret = { fg = "${resolveSemantic('plugins.telescope.selection_caret')}" }`);
+  luaLines.push(`  highlights.TelescopeMultiSelection = { bg = "${resolveSemantic('plugins.telescope.multi_selection')}" }`);
+  luaLines.push(`  highlights.TelescopeMultiIcon = { fg = "${resolveSemantic('plugins.telescope.multi_icon')}" }`);
+  luaLines.push(`  highlights.TelescopePromptNormal = { fg = "${resolveSemantic('plugins.telescope.prompt_normal')}" }`);
+  luaLines.push(`  highlights.TelescopePromptBorder = { fg = "${resolveSemantic('plugins.telescope.prompt_border')}" }`);
+  luaLines.push(`  highlights.TelescopePromptTitle = { fg = "${resolveSemantic('plugins.telescope.prompt_title')}", bold = true }`);
+  luaLines.push(`  highlights.TelescopeResultsTitle = { fg = "${resolveSemantic('plugins.telescope.results_title')}", bold = true }`);
+  luaLines.push(`  highlights.TelescopePreviewTitle = { fg = "${resolveSemantic('plugins.telescope.preview_title')}", bold = true }`);
 
   luaLines.push('');
   luaLines.push('  -- UI elements');

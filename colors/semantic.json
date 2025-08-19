@@ -169,5 +169,21 @@
     "warning": "ui.warning", 
     "info": "ui.info",
     "hint": "ui.hint"
+  },
+
+  "plugins": {
+    "telescope": {
+      "border": "ui.border",
+      "normal": "base.fg",
+      "selection": "ui.bg_darker",
+      "selection_caret": "bright.blue", 
+      "multi_selection": "ui.bg_dark",
+      "multi_icon": "ansi.cyan",
+      "prompt_normal": "base.fg",
+      "prompt_border": "ui.border",
+      "prompt_title": "bright.blue",
+      "results_title": "ansi.cyan",
+      "preview_title": "ansi.green"
+    }
   }
 }

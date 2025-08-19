@@ -36,6 +36,7 @@
   "ui": {
     "bg_dark": "#0a1530",
     "bg_light": "#1a3050", 
+    "bg_darker": "#051020",
     "border": "#2a4060",
     "comment": "#6a7a8a",
     "error": "#f05b50",

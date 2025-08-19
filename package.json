@@ -9,7 +9,13 @@
     "generate:vscode": "tsx build/generate.ts",
     "build": "npm run generate",
     "typecheck": "tsc --noEmit",
-    "dev": "tsx watch build/generate.ts"
+    "dev": "tsx watch build/generate.ts",
+    "validate": "npm run typecheck && npm run validate:json && npm run validate:generated",
+    "validate:json": "tsx build/validate.ts",
+    "validate:generated": "tsx build/validate-generated.ts",
+    "prepare": "npm run validate && npm run generate",
+    "setup-hooks": "bash scripts/setup-git-hooks.sh",
+    "postinstall": "npm run setup-hooks"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",

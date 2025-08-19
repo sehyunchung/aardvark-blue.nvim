@@ -35,3 +35,6 @@ build/*.mjs
 
 # TypeScript
 *.tsbuildinfo
+
+# VS Code extensions
+*.vsix

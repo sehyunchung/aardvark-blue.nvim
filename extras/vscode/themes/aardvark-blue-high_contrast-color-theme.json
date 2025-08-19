@@ -105,48 +105,48 @@
     "terminal.ansiBrightWhite": "#f7f7f7"
   },
   "semanticTokenColors": {
-    "entity.name.function": "#ffe763",
-    "entity.name.function.ts": "#ffe763",
-    "entity.name.function.tsx": "#ffe763",
-    "support.function": "#ffe763",
-    "support.function.ts": "#ffe763",
-    "support.function.tsx": "#ffe763",
-    "variable:callable": "#ffe763",
-    "variable.declaration:callable": "#ffe763",
-    "property:callable": "#ffe763",
-    "meta.function-call": "#ffe763",
-    "meta.function-call.ts": "#ffe763",
-    "meta.function-call.tsx": "#ffe763",
-    "entity.name.function.member": "#ffe763",
-    "entity.name.method": "#ffe763",
-    "entity.name.method.ts": "#ffe763",
-    "entity.name.method.tsx": "#ffe763",
-    "variable": "#dddddd",
-    "variable.declaration": "#dddddd",
-    "variable.other.readwrite": "#dddddd",
-    "parameter": "#dddddd",
-    "variable.parameter": "#dddddd",
-    "property": "#dddddd",
-    "entity.name.type": "#60b6cb",
-    "entity.name.type.ts": "#60b6cb",
-    "entity.name.type.tsx": "#60b6cb",
-    "entity.name.type.class": "#60b6cb",
-    "entity.name.type.class.ts": "#60b6cb",
-    "entity.name.type.class.tsx": "#60b6cb",
-    "entity.name.type.interface": "#60b6cb",
-    "entity.name.type.interface.ts": "#60b6cb",
-    "entity.name.type.interface.tsx": "#60b6cb",
-    "support.type": "#60b6cb",
-    "support.type.ts": "#60b6cb",
-    "support.type.tsx": "#60b6cb",
-    "storage.type.class": "#60b6cb",
-    "storage.type.class.ts": "#60b6cb",
-    "storage.type.class.tsx": "#60b6cb",
-    "variable.declaration:type": "#60b6cb",
-    "entity.other.inherited-class": "#60b6cb",
-    "entity.name.namespace": "#60b6cb",
-    "entity.name.namespace.ts": "#60b6cb",
-    "entity.name.namespace.tsx": "#60b6cb",
+    "entity.name.function": "#60a4ec",
+    "entity.name.function.ts": "#60a4ec",
+    "entity.name.function.tsx": "#60a4ec",
+    "support.function": "#60a4ec",
+    "support.function.ts": "#60a4ec",
+    "support.function.tsx": "#60a4ec",
+    "variable:callable": "#60a4ec",
+    "variable.declaration:callable": "#60a4ec",
+    "property:callable": "#60a4ec",
+    "meta.function-call": "#60a4ec",
+    "meta.function-call.ts": "#60a4ec",
+    "meta.function-call.tsx": "#60a4ec",
+    "entity.name.function.member": "#60a4ec",
+    "entity.name.method": "#60a4ec",
+    "entity.name.method.ts": "#60a4ec",
+    "entity.name.method.tsx": "#60a4ec",
+    "variable": "#6a7a8a",
+    "variable.declaration": "#6a7a8a",
+    "variable.other.readwrite": "#6a7a8a",
+    "parameter": "#6a7a8a",
+    "variable.parameter": "#6a7a8a",
+    "property": "#6a7a8a",
+    "entity.name.type": "#ffe763",
+    "entity.name.type.ts": "#ffe763",
+    "entity.name.type.tsx": "#ffe763",
+    "entity.name.type.class": "#ffe763",
+    "entity.name.type.class.ts": "#ffe763",
+    "entity.name.type.class.tsx": "#ffe763",
+    "entity.name.type.interface": "#ffe763",
+    "entity.name.type.interface.ts": "#ffe763",
+    "entity.name.type.interface.tsx": "#ffe763",
+    "support.type": "#ffe763",
+    "support.type.ts": "#ffe763",
+    "support.type.tsx": "#ffe763",
+    "storage.type.class": "#ffe763",
+    "storage.type.class.ts": "#ffe763",
+    "storage.type.class.tsx": "#ffe763",
+    "variable.declaration:type": "#ffe763",
+    "entity.other.inherited-class": "#ffe763",
+    "entity.name.namespace": "#ffe763",
+    "entity.name.namespace.ts": "#ffe763",
+    "entity.name.namespace.tsx": "#ffe763",
     "keyword": "#c43ac3",
     "keyword.control": "#c43ac3",
     "keyword.control.conditional": "#c43ac3",
@@ -162,7 +162,7 @@
     "storage.type.ts": "#c43ac3",
     "storage.type.tsx": "#c43ac3",
     "storage.modifier": "#c43ac3",
-    "storage.modifier.ts": "#dbba00",
+    "storage.modifier.ts": "#ffe763",
     "storage.modifier.tsx": "#c43ac3",
     "keyword.other.type": "#c43ac3",
     "keyword.other.type.ts": "#c43ac3",
@@ -173,10 +173,10 @@
     "keyword.interface": "#c43ac3",
     "keyword.interface.ts": "#c43ac3",
     "keyword.interface.tsx": "#c43ac3",
-    "storage.modifier.access": "#dbba00",
-    "storage.modifier.async": "#dbba00",
-    "storage.modifier.static": "#dbba00",
-    "keyword.other.readonly": "#dbba00",
+    "storage.modifier.access": "#ffe763",
+    "storage.modifier.async": "#ffe763",
+    "storage.modifier.static": "#ffe763",
+    "keyword.other.readonly": "#ffe763",
     "string": "#95dc55",
     "string.quoted": "#95dc55",
     "constant.numeric": "#95dc55",
@@ -187,12 +187,12 @@
     "keyword.operator.comparison": "#008eb0",
     "keyword.operator.logical": "#008eb0",
     "punctuation.accessor": "#008eb0",
-    "entity.name.tag.tsx": "#60a4ec",
-    "entity.name.tag.jsx": "#60a4ec",
-    "support.class.component.tsx": "#60a4ec",
-    "support.class.component.jsx": "#60a4ec",
-    "entity.name.tag.html.tsx": "#c43ac3",
-    "entity.name.tag.html.jsx": "#c43ac3",
+    "entity.name.tag.tsx": "#ffe763",
+    "entity.name.tag.jsx": "#ffe763",
+    "support.class.component.tsx": "#ffe763",
+    "support.class.component.jsx": "#ffe763",
+    "entity.name.tag.html.tsx": "#60b6cb",
+    "entity.name.tag.html.jsx": "#60b6cb",
     "entity.other.attribute-name.tsx": "#ffe763",
     "entity.other.attribute-name.jsx": "#ffe763",
     "comment": "#6a7a8a",
@@ -278,7 +278,7 @@
         "entity.name.method.tsx"
       ],
       "settings": {
-        "foreground": "#ffe763"
+        "foreground": "#60a4ec"
       }
     },
     {
@@ -292,7 +292,7 @@
         "property"
       ],
       "settings": {
-        "foreground": "#dddddd"
+        "foreground": "#6a7a8a"
       }
     },
     {
@@ -333,7 +333,7 @@
         "entity.name.namespace.tsx"
       ],
       "settings": {
-        "foreground": "#60b6cb"
+        "foreground": "#ffe763"
       }
     },
     {
@@ -358,7 +358,7 @@
         "storage.modifier.ts"
       ],
       "settings": {
-        "foreground": "#dbba00"
+        "foreground": "#ffe763"
       }
     },
     {
@@ -383,7 +383,7 @@
         "support.class.component.jsx"
       ],
       "settings": {
-        "foreground": "#60a4ec"
+        "foreground": "#ffe763"
       }
     },
     {
@@ -393,7 +393,7 @@
         "entity.name.tag.html.jsx"
       ],
       "settings": {
-        "foreground": "#c43ac3"
+        "foreground": "#60b6cb"
       }
     },
     {

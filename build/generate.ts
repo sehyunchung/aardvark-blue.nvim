@@ -71,6 +71,8 @@ type NestedValue = string | Record<string, any>;
 // Load color definitions
 const palette: ColorPalette = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/palette.json'), 'utf8'));
 const semantic: SemanticColors = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/semantic.json'), 'utf8'));
+const vscodeTokens = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/vscode-tokens.json'), 'utf8'));
+const colorAssignments = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/color-assignments.json'), 'utf8'));
 
 // Color resolver - resolves semantic references to actual hex values
 function resolveColor(colorRef: string): string {
@@ -108,6 +110,46 @@ function resolveSemantic(semanticRef: string): string {
   }
   
   return resolveColor(value as string);
+}
+
+// Resolve semantic token group to color using swappable assignments
+function resolveTokenColor(tokenGroup: string, variant: string = 'default'): string {
+  const assignments = variant === 'default' 
+    ? colorAssignments.assignments
+    : colorAssignments.alternative_assignments[variant]?.assignments;
+    
+  if (!assignments) {
+    throw new Error(`Assignment variant '${variant}' not found`);
+  }
+  
+  const semanticRole = assignments[tokenGroup];
+  if (!semanticRole) {
+    throw new Error(`Token group '${tokenGroup}' not found in assignments`);
+  }
+  
+  const paletteRef = colorAssignments.semantic_roles[semanticRole]?.palette_ref;
+  if (!paletteRef) {
+    throw new Error(`Semantic role '${semanticRole}' not found`);
+  }
+  
+  return resolveColor(paletteRef);
+}
+
+// Generate semantic token colors for VS Code
+function generateSemanticTokenColors(variant: string = 'default'): Record<string, string> {
+  const semanticColors: Record<string, string> = {};
+  
+  // Apply semantic token colors using our grouping system
+  for (const [groupName, groupInfo] of Object.entries(vscodeTokens.token_groups)) {
+    const color = resolveTokenColor(groupName, variant);
+    
+    // Apply color to all tokens in this group
+    for (const token of groupInfo.tokens) {
+      semanticColors[token] = color;
+    }
+  }
+  
+  return semanticColors;
 }
 
 // Generate Neovim palette.lua
@@ -461,7 +503,7 @@ function generateNeovimHighlights(): string {
 }
 
 // Generate VS Code theme JSON
-function generateVSCodeTheme(): string {
+function generateVSCodeTheme(variant: string = 'default'): string {
   const theme = {
     name: "Aardvark Blue",
     type: "dark",
@@ -597,6 +639,7 @@ function generateVSCodeTheme(): string {
       "terminal.ansiBrightCyan": resolveColor('bright.cyan'),
       "terminal.ansiBrightWhite": resolveColor('bright.white')
     },
+    semanticTokenColors: generateSemanticTokenColors(variant),
     tokenColors: [
       {
         settings: {
@@ -605,185 +648,87 @@ function generateVSCodeTheme(): string {
       },
       {
         name: "Comments",
-        scope: ["comment", "punctuation.definition.comment"],
+        scope: vscodeTokens.token_groups.comment.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.comment'),
+          foreground: resolveTokenColor('comment', variant),
           fontStyle: "italic"
         }
       },
       {
-        name: "Keywords (if, else, while, try, pub)",
-        scope: [
-          "keyword.control",
-          "keyword.control.conditional", 
-          "keyword.control.loop",
-          "keyword.control.exception",
-          "keyword.other.pub",
-          "storage.modifier"
-        ],
+        name: "Control Keywords",
+        scope: vscodeTokens.token_groups.control.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.keyword')
+          foreground: resolveTokenColor('control', variant)
         }
       },
       {
-        name: "Function keyword (fn)",
-        scope: [
-          "storage.type.function",
-          "keyword.other.fn",
-          "keyword.control.def"
-        ],
+        name: "Functions and Callables",
+        scope: vscodeTokens.token_groups.callable.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.keyword_function')
+          foreground: resolveTokenColor('callable', variant)
         }
       },
       {
-        name: "Function names",
-        scope: [
-          "entity.name.function",
-          "meta.function-call.generic",
-          "support.function"
-        ],
+        name: "Data Variables",
+        scope: vscodeTokens.token_groups.data.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.function')
+          foreground: resolveTokenColor('data', variant)
         }
       },
       {
-        name: "Variables",
-        scope: [
-          "variable",
-          "variable.other",
-          "variable.parameter"
-        ],
+        name: "Strings and Literals",
+        scope: vscodeTokens.token_groups.emphasis.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.identifier')
+          foreground: resolveTokenColor('emphasis', variant)
         }
       },
       {
-        name: "Strings",
-        scope: [
-          "string",
-          "string.quoted",
-          "string.template"
-        ],
+        name: "Types and Structure",
+        scope: vscodeTokens.token_groups.structure.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.string')
+          foreground: resolveTokenColor('structure', variant)
         }
       },
       {
-        name: "Numbers",
-        scope: [
-          "constant.numeric",
-          "constant.numeric.integer",
-          "constant.numeric.float"
-        ],
+        name: "Constants",
+        scope: vscodeTokens.token_groups.constant.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.number')
+          foreground: resolveTokenColor('constant', variant)
         }
       },
       {
-        name: "Booleans and Constants",
-        scope: [
-          "constant.language.boolean",
-          "constant.language",
-          "constant.other"
-        ],
+        name: "Modifiers",
+        scope: vscodeTokens.token_groups.modifier.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.boolean')
+          foreground: resolveTokenColor('modifier', variant)
         }
       },
       {
-        name: "Types",
-        scope: [
-          "support.type",
-          "entity.name.type",
-          "storage.type",
-          "entity.name.class"
-        ],
+        name: "Operators",
+        scope: vscodeTokens.token_groups.operator.tokens,
         settings: {
-          foreground: resolveSemantic('syntax.type')
-        }
-      },
-      {
-        name: "TypeScript Modifiers",
-        scope: [
-          "storage.modifier.public.ts",
-          "storage.modifier.private.ts",
-          "storage.modifier.protected.ts",
-          "storage.modifier.readonly.ts"
-        ],
-        settings: {
-          foreground: resolveSemantic('typescript.modifier')
-        }
-      },
-      {
-        name: "TypeScript Type Keywords",
-        scope: [
-          "storage.type.interface.ts",
-          "storage.type.type.ts",
-          "storage.type.enum.ts"
-        ],
-        settings: {
-          foreground: resolveSemantic('typescript.type_keyword')
-        }
-      },
-      {
-        name: "TypeScript Operators",
-        scope: [
-          "keyword.operator.type.ts",
-          "keyword.operator.expression.keyof.ts",
-          "keyword.control.as.ts"
-        ],
-        settings: {
-          foreground: resolveSemantic('typescript.type_operator')
+          foreground: resolveTokenColor('operator', variant)
         }
       },
       {
         name: "JSX Components",
-        scope: [
-          "support.class.component.tsx",
-          "entity.name.tag.tsx"
-        ],
+        scope: vscodeTokens.token_groups.jsx_element.tokens,
         settings: {
-          foreground: resolveSemantic('jsx.component')
+          foreground: resolveTokenColor('jsx_element', variant)
         }
       },
       {
-        name: "JSX HTML Tags",
-        scope: [
-          "entity.name.tag.html.tsx"
-        ],
+        name: "JSX HTML Elements",
+        scope: vscodeTokens.token_groups.jsx_builtin.tokens,
         settings: {
-          foreground: resolveSemantic('jsx.html_tag')
+          foreground: resolveTokenColor('jsx_builtin', variant)
         }
       },
       {
         name: "JSX Attributes",
-        scope: [
-          "entity.other.attribute-name.tsx"
-        ],
+        scope: vscodeTokens.token_groups.jsx_attribute.tokens,
         settings: {
-          foreground: resolveSemantic('jsx.attribute')
-        }
-      },
-      {
-        name: "Decorators",
-        scope: [
-          "meta.decorator",
-          "punctuation.decorator"
-        ],
-        settings: {
-          foreground: resolveSemantic('typescript.decorator')
-        }
-      },
-      {
-        name: "Punctuation",
-        scope: [
-          "punctuation.separator",
-          "punctuation.terminator",
-          "punctuation.definition"
-        ],
-        settings: {
-          foreground: resolveSemantic('syntax.delimiter')
+          foreground: resolveTokenColor('jsx_attribute', variant)
         }
       }
     ]
@@ -810,10 +755,18 @@ const highlightsContent = generateNeovimHighlights();
 fs.writeFileSync(path.join(outputDir, 'highlights.lua'), highlightsContent);
 console.log('✓ Generated highlights.lua');
 
-// VS Code theme
-const vscodeThemeContent = generateVSCodeTheme();
-fs.writeFileSync(path.join(vscodeOutputDir, 'aardvark-blue-color-theme.json'), vscodeThemeContent);
-console.log('✓ Generated aardvark-blue-color-theme.json');
+// VS Code themes (default and variants)
+const defaultTheme = generateVSCodeTheme('default');
+fs.writeFileSync(path.join(vscodeOutputDir, 'aardvark-blue-color-theme.json'), defaultTheme);
+console.log('✓ Generated aardvark-blue-color-theme.json (default)');
+
+// Generate alternative variants
+for (const [variantName, variantInfo] of Object.entries(colorAssignments.alternative_assignments)) {
+  const variantTheme = generateVSCodeTheme(variantName);
+  const filename = `aardvark-blue-${variantName}-color-theme.json`;
+  fs.writeFileSync(path.join(vscodeOutputDir, filename), variantTheme);
+  console.log(`✓ Generated ${filename} (${variantInfo.description})`);
+}
 
 console.log('\\nGeneration complete! Files written to:');
 console.log('  - lua/aardvark-blue/ (Neovim)');

@@ -91,6 +91,16 @@ interface ColorAssignments {
 // Utility type for nested object traversal
 type NestedValue = string | Record<string, any>;
 
+// Hex color validation
+function isValidHexColor(color: string): boolean {
+  return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color);
+}
+
+// Enhanced error formatting
+function formatColorError(colorRef: string, context: string = ''): string {
+  return `Color resolution failed for '${colorRef}'${context ? ` in ${context}` : ''}. Expected format: 'category.color' (e.g., 'ansi.red') or hex color (e.g., '#ff0000')`;
+}
+
 // Load color definitions
 const palette: ColorPalette = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/palette.json'), 'utf8'));
 const semantic: SemanticColors = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/semantic.json'), 'utf8'));
@@ -98,64 +108,110 @@ const vscodeTokens: VSCodeTokens = JSON.parse(fs.readFileSync(path.join(__dirnam
 const colorAssignments: ColorAssignments = JSON.parse(fs.readFileSync(path.join(__dirname, '../colors/color-assignments.json'), 'utf8'));
 
 // Color resolver - resolves semantic references to actual hex values
-function resolveColor(colorRef: string): string {
+function resolveColor(colorRef: string, context: string = ''): string {
   if (!colorRef || typeof colorRef !== 'string') {
-    throw new Error(`Invalid color reference: ${colorRef}`);
+    throw new Error(`Invalid color reference: expected string, got ${typeof colorRef}${context ? ` in ${context}` : ''}`);
   }
   
   if (colorRef.startsWith('#')) {
+    if (!isValidHexColor(colorRef)) {
+      throw new Error(`Invalid hex color format: '${colorRef}'${context ? ` in ${context}` : ''}. Expected format: #RRGGBB or #RGB`);
+    }
     return colorRef; // Already a hex color
   }
   
   const parts = colorRef.split('.');
-  let value: NestedValue = palette;
-  
-  for (const part of parts) {
-    if (typeof value !== 'object' || value[part] === undefined) {
-      throw new Error(`Color reference '${colorRef}' not found in palette`);
-    }
-    value = value[part];
+  if (parts.length < 2) {
+    throw new Error(formatColorError(colorRef, context));
   }
   
-  return value as string;
+  let value: NestedValue = palette;
+  const traversalPath: string[] = [];
+  
+  for (const part of parts) {
+    traversalPath.push(part);
+    if (typeof value !== 'object' || value === null || !(part in value)) {
+      const availableKeys = typeof value === 'object' && value !== null ? Object.keys(value).join(', ') : 'none';
+      throw new Error(`${formatColorError(colorRef, context)}. Path '${traversalPath.join('.')}' not found. Available keys at '${traversalPath.slice(0, -1).join('.') || 'root'}': ${availableKeys}`);
+    }
+    value = (value as Record<string, any>)[part];
+  }
+  
+  if (typeof value !== 'string') {
+    throw new Error(`Color reference '${colorRef}' resolves to ${typeof value}, expected string${context ? ` in ${context}` : ''}`);
+  }
+  
+  // Validate the resolved hex color
+  if (!isValidHexColor(value)) {
+    throw new Error(`Resolved color '${value}' from '${colorRef}' is not a valid hex color${context ? ` in ${context}` : ''}`);
+  }
+  
+  return value;
 }
 
 // Resolve semantic reference to color
-function resolveSemantic(semanticRef: string): string {
-  const parts = semanticRef.split('.');
-  let value: NestedValue = semantic;
-  
-  for (const part of parts) {
-    if (typeof value !== 'object' || value[part] === undefined) {
-      throw new Error(`Semantic reference '${semanticRef}' not found`);
-    }
-    value = value[part];
+function resolveSemantic(semanticRef: string, context: string = ''): string {
+  if (!semanticRef || typeof semanticRef !== 'string') {
+    throw new Error(`Invalid semantic reference: expected string, got ${typeof semanticRef}${context ? ` in ${context}` : ''}`);
   }
   
-  return resolveColor(value as string);
+  const parts = semanticRef.split('.');
+  if (parts.length < 2) {
+    throw new Error(`Invalid semantic reference format: '${semanticRef}'${context ? ` in ${context}` : ''}. Expected format: 'category.property' (e.g., 'syntax.keyword')`);
+  }
+  
+  let value: NestedValue = semantic;
+  const traversalPath: string[] = [];
+  
+  for (const part of parts) {
+    traversalPath.push(part);
+    if (typeof value !== 'object' || value === null || !(part in value)) {
+      const availableKeys = typeof value === 'object' && value !== null ? Object.keys(value).join(', ') : 'none';
+      throw new Error(`Semantic reference '${semanticRef}' not found${context ? ` in ${context}` : ''}. Path '${traversalPath.join('.')}' not found. Available keys at '${traversalPath.slice(0, -1).join('.') || 'root'}': ${availableKeys}`);
+    }
+    value = (value as Record<string, any>)[part];
+  }
+  
+  if (typeof value !== 'string') {
+    throw new Error(`Semantic reference '${semanticRef}' resolves to ${typeof value}, expected string${context ? ` in ${context}` : ''}`);
+  }
+  
+  return resolveColor(value, `semantic.${semanticRef}`);
 }
 
 // Resolve semantic token group to color using swappable assignments
 function resolveTokenColor(tokenGroup: string, variant: string = 'default'): string {
+  if (!tokenGroup || typeof tokenGroup !== 'string') {
+    throw new Error(`Invalid token group: expected string, got ${typeof tokenGroup}`);
+  }
+  
   const assignments = variant === 'default' 
     ? colorAssignments.assignments
     : colorAssignments.alternative_assignments[variant]?.assignments;
     
   if (!assignments) {
-    throw new Error(`Assignment variant '${variant}' not found`);
+    const availableVariants = ['default', ...Object.keys(colorAssignments.alternative_assignments)];
+    throw new Error(`Assignment variant '${variant}' not found. Available variants: ${availableVariants.join(', ')}`);
   }
   
   const semanticRole = assignments[tokenGroup];
   if (!semanticRole) {
-    throw new Error(`Token group '${tokenGroup}' not found in assignments`);
+    const availableGroups = Object.keys(assignments);
+    throw new Error(`Token group '${tokenGroup}' not found in assignments for variant '${variant}'. Available groups: ${availableGroups.join(', ')}`);
   }
   
-  const paletteRef = colorAssignments.semantic_roles[semanticRole]?.palette_ref;
+  const roleInfo = colorAssignments.semantic_roles[semanticRole];
+  if (!roleInfo) {
+    const availableRoles = Object.keys(colorAssignments.semantic_roles);
+    throw new Error(`Semantic role '${semanticRole}' not found. Available roles: ${availableRoles.join(', ')}`);
+  }
+  
+  const paletteRef = roleInfo.palette_ref;
   if (!paletteRef) {
-    throw new Error(`Semantic role '${semanticRole}' not found`);
+    throw new Error(`Semantic role '${semanticRole}' is missing palette_ref property`);
   }
   
-  return resolveColor(paletteRef);
+  return resolveColor(paletteRef, `token_group.${tokenGroup}.${variant}`);
 }
 
 // Generate semantic token colors for VS Code
@@ -671,7 +727,7 @@ function generateVSCodeTheme(variant: string = 'default'): string {
       },
       {
         name: "Comments",
-        scope: vscodeTokens.token_groups.comment.tokens,
+        scope: vscodeTokens.token_groups.comment?.tokens || [],
         settings: {
           foreground: resolveTokenColor('comment', variant),
           fontStyle: "italic"
@@ -679,77 +735,77 @@ function generateVSCodeTheme(variant: string = 'default'): string {
       },
       {
         name: "Control Keywords",
-        scope: vscodeTokens.token_groups.control.tokens,
+        scope: vscodeTokens.token_groups.control?.tokens || [],
         settings: {
           foreground: resolveTokenColor('control', variant)
         }
       },
       {
         name: "Functions and Callables",
-        scope: vscodeTokens.token_groups.callable.tokens,
+        scope: vscodeTokens.token_groups.callable?.tokens || [],
         settings: {
           foreground: resolveTokenColor('callable', variant)
         }
       },
       {
         name: "Data Variables",
-        scope: vscodeTokens.token_groups.data.tokens,
+        scope: vscodeTokens.token_groups.data?.tokens || [],
         settings: {
           foreground: resolveTokenColor('data', variant)
         }
       },
       {
         name: "Strings and Literals",
-        scope: vscodeTokens.token_groups.emphasis.tokens,
+        scope: vscodeTokens.token_groups.emphasis?.tokens || [],
         settings: {
           foreground: resolveTokenColor('emphasis', variant)
         }
       },
       {
         name: "Types and Structure",
-        scope: vscodeTokens.token_groups.structure.tokens,
+        scope: vscodeTokens.token_groups.structure?.tokens || [],
         settings: {
           foreground: resolveTokenColor('structure', variant)
         }
       },
       {
         name: "Constants",
-        scope: vscodeTokens.token_groups.constant.tokens,
+        scope: vscodeTokens.token_groups.constant?.tokens || [],
         settings: {
           foreground: resolveTokenColor('constant', variant)
         }
       },
       {
         name: "Modifiers",
-        scope: vscodeTokens.token_groups.modifier.tokens,
+        scope: vscodeTokens.token_groups.modifier?.tokens || [],
         settings: {
           foreground: resolveTokenColor('modifier', variant)
         }
       },
       {
         name: "Operators",
-        scope: vscodeTokens.token_groups.operator.tokens,
+        scope: vscodeTokens.token_groups.operator?.tokens || [],
         settings: {
           foreground: resolveTokenColor('operator', variant)
         }
       },
       {
         name: "JSX Components",
-        scope: vscodeTokens.token_groups.jsx_element.tokens,
+        scope: vscodeTokens.token_groups.jsx_element?.tokens || [],
         settings: {
           foreground: resolveTokenColor('jsx_element', variant)
         }
       },
       {
         name: "JSX HTML Elements",
-        scope: vscodeTokens.token_groups.jsx_builtin.tokens,
+        scope: vscodeTokens.token_groups.jsx_builtin?.tokens || [],
         settings: {
           foreground: resolveTokenColor('jsx_builtin', variant)
         }
       },
       {
         name: "JSX Attributes",
-        scope: vscodeTokens.token_groups.jsx_attribute.tokens,
+        scope: vscodeTokens.token_groups.jsx_attribute?.tokens || [],
         settings: {
           foreground: resolveTokenColor('jsx_attribute', variant)
         }
@@ -766,28 +822,77 @@ const vscodeOutputDir = path.join(__dirname, '../extras/vscode/themes');
 fs.mkdirSync(outputDir, { recursive: true });
 fs.mkdirSync(vscodeOutputDir, { recursive: true });
 
+// Generate auto-generated file headers
+function generateLuaHeader(filename: string): string {
+  const timestamp = new Date().toISOString();
+  return `--[[
+  ${filename}
+  
+  Auto-generated by build/generate.ts
+  Generated on: ${timestamp}
+  
+  DO NOT EDIT THIS FILE DIRECTLY!
+  Instead, modify the JSON files in colors/ directory and run:
+    npm run generate
+  
+  Source files:
+    - colors/palette.json
+    - colors/semantic.json
+    - colors/vscode-tokens.json
+    - colors/color-assignments.json
+--]]
+
+`;
+}
+
+function generateJSONHeader(filename: string): string {
+  const timestamp = new Date().toISOString();
+  return JSON.stringify({
+    "$schema": "vscode://schemas/color-theme",
+    "_comment": [
+      `${filename}`,
+      "",
+      "Auto-generated by build/generate.ts",
+      `Generated on: ${timestamp}`,
+      "",
+      "DO NOT EDIT THIS FILE DIRECTLY!",
+      "Instead, modify the JSON files in colors/ directory and run:",
+      "  npm run generate",
+      "",
+      "Source files:",
+      "  - colors/palette.json",
+      "  - colors/semantic.json", 
+      "  - colors/vscode-tokens.json",
+      "  - colors/color-assignments.json"
+    ]
+  }, null, 2).slice(0, -1); // Remove closing brace to append theme content
+}
+
 // Generate files
 console.log('Generating color themes from JSON...');
 
 // Neovim files
-const paletteContent = generateNeovimPalette();
+const paletteContent = generateLuaHeader('palette.lua') + generateNeovimPalette();
 fs.writeFileSync(path.join(outputDir, 'palette.lua'), paletteContent);
 console.log('✓ Generated palette.lua');
 
-const highlightsContent = generateNeovimHighlights();
+const highlightsContent = generateLuaHeader('highlights.lua') + generateNeovimHighlights();
 fs.writeFileSync(path.join(outputDir, 'highlights.lua'), highlightsContent);
 console.log('✓ Generated highlights.lua');
 
 // VS Code themes (default and variants)
+const defaultThemeFilename = 'aardvark-blue-color-theme.json';
 const defaultTheme = generateVSCodeTheme('default');
-fs.writeFileSync(path.join(vscodeOutputDir, 'aardvark-blue-color-theme.json'), defaultTheme);
+const defaultWithHeader = generateJSONHeader(defaultThemeFilename) + ',\n' + defaultTheme.slice(1); // Remove opening brace and add comma
+fs.writeFileSync(path.join(vscodeOutputDir, defaultThemeFilename), defaultWithHeader);
 console.log('✓ Generated aardvark-blue-color-theme.json (default)');
 
 // Generate alternative variants
 for (const [variantName, variantInfo] of Object.entries(colorAssignments.alternative_assignments)) {
   const variantTheme = generateVSCodeTheme(variantName);
   const filename = `aardvark-blue-${variantName}-color-theme.json`;
-  fs.writeFileSync(path.join(vscodeOutputDir, filename), variantTheme);
+  const variantWithHeader = generateJSONHeader(filename) + ',\n' + variantTheme.slice(1); // Remove opening brace and add comma
+  fs.writeFileSync(path.join(vscodeOutputDir, filename), variantWithHeader);
   console.log(`✓ Generated ${filename} (${variantInfo.description})`);
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "aardvark-blue-theme",
   "displayName": "Aardvark Blue Theme",
-  "description": "Professional dark theme collection with 3 variants (Default, High Contrast, Minimal) inspired by Ghostty's Aardvark Blue. Features comprehensive TypeScript/JSX support and semantic token highlighting.",
+  "description": "Professional dark theme inspired by Ghostty's Aardvark Blue terminal. Features comprehensive TypeScript/JSX support with semantic token highlighting and optimal readability.",
   "version": "2.0.1",
   "publisher": "SehyunChung",
   "author": {
@@ -37,11 +37,7 @@
     "deep-blue",
     "syntax-highlighting",
     "semantic-tokens",
-    "high-contrast",
-    "minimal",
-    "variants",
-    "accessibility",
-    "multi-theme"
+    "accessibility"
   ],
   "icon": "icon.png",
   "galleryBanner": {
@@ -54,16 +50,6 @@
         "label": "Aardvark Blue",
         "uiTheme": "vs-dark",
         "path": "./themes/aardvark-blue-color-theme.json"
-      },
-      {
-        "label": "Aardvark Blue High Contrast",
-        "uiTheme": "vs-dark",
-        "path": "./themes/aardvark-blue-high_contrast-color-theme.json"
-      },
-      {
-        "label": "Aardvark Blue Minimal",
-        "uiTheme": "vs-dark", 
-        "path": "./themes/aardvark-blue-minimal-color-theme.json"
       }
     ]
   },

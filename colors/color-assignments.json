@@ -64,44 +64,5 @@
     "jsx_delimiter": "muted",
     "comment": "muted",
     "constant": "danger"
-  },
-  
-  "alternative_assignments": {
-    "high_contrast": {
-      "description": "Higher contrast color scheme",
-      "assignments": {
-        "callable": "primary",
-        "data": "muted",
-        "structure": "accent", 
-        "control": "control",
-        "modifier": "warning",
-        "emphasis": "success",
-        "operator": "secondary",
-        "jsx_element": "danger",
-        "jsx_builtin": "structure",
-        "jsx_attribute": "warning",
-        "jsx_delimiter": "muted",
-        "comment": "muted",
-        "constant": "danger"
-      }
-    },
-    "minimal": {
-      "description": "Minimal color variation",
-      "assignments": {
-        "callable": "accent",
-        "data": "neutral",
-        "structure": "neutral", 
-        "control": "control",
-        "modifier": "control",
-        "emphasis": "success",
-        "operator": "neutral",
-        "jsx_element": "danger",
-        "jsx_builtin": "structure",
-        "jsx_attribute": "success",
-        "jsx_delimiter": "muted",
-        "comment": "muted",
-        "constant": "accent"
-      }
-    }
   }
 }

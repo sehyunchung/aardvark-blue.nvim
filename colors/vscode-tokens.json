@@ -119,10 +119,8 @@
       ]
     },
     "jsx_element": {
-      "description": "JSX/React components and elements",
+      "description": "JSX/React components",
       "tokens": [
-        "entity.name.tag.tsx",
-        "entity.name.tag.jsx",
         "support.class.component.tsx",
         "support.class.component.jsx"
       ]
@@ -130,8 +128,8 @@
     "jsx_builtin": {
       "description": "HTML elements in JSX",
       "tokens": [
-        "entity.name.tag.html.tsx",
-        "entity.name.tag.html.jsx"
+        "entity.name.tag.tsx",
+        "entity.name.tag.jsx"
       ]
     },
     "jsx_attribute": {

@@ -53,11 +53,11 @@
   },
   
   "jsx": {
-    "component": "bright.blue",
-    "html_tag": "ansi.blue", 
+    "component": "bright.red",
+    "html_tag": "bright.cyan", 
     "attribute": "bright.yellow",
     "delimiter": "ansi.white",
-    "member_component": "bright.blue"
+    "member_component": "bright.red"
   },
   
   "editor": {

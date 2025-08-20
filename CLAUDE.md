@@ -58,11 +58,11 @@ aardvark-blue.nvim/
 **colors/vscode-tokens.json**: VS Code token groupings
 - Groups VS Code scopes by semantic meaning
 - Enables swappable color assignments
-- Supports multiple theme variants
+- Single, well-crafted theme approach
 
 **colors/color-assignments.json**: Swappable semantic roles
 - Maps token groups to semantic roles (callable → accent)
-- Enables easy theme variants (high_contrast, minimal)
+- Provides consistent color experience across platforms
 - Maintains consistency across all platforms
 
 ### Generated Components (AUTO-GENERATED - DO NOT EDIT)
@@ -85,7 +85,7 @@ aardvark-blue.nvim/
 - Type-safe color resolution and validation
 - Multi-platform theme generation (Neovim + VS Code)
 - Comprehensive error handling with detailed messages
-- Supports multiple VS Code theme variants
+- Generates optimized VS Code color theme
 
 **build/validate.ts**: JSON configuration validator
 - Validates all JSON color configuration files
@@ -178,7 +178,7 @@ The colorscheme leverages specific TreeSitter capture groups for precise syntax 
 # 1. Edit JSON configuration files
 vim colors/palette.json        # Base colors
 vim colors/semantic.json       # Semantic mappings
-vim colors/color-assignments.json # Theme variants
+vim colors/color-assignments.json # Color role assignments
 
 # 2. Regenerate all themes
 npm run generate               # Generate Neovim + VS Code themes
@@ -218,7 +218,7 @@ git commit -m "feat: your changes"
 2. **Generated Files**: Verify with `npm run validate:generated`  
 3. **Multi-platform testing**:
    - Test Neovim with various language files (TypeScript, React, Rust, etc.)
-   - Test all 3 VS Code variants (Default, High Contrast, Minimal)
+   - Test VS Code theme with various syntax highlighting scenarios
    - Compare side-by-side with Ghostty terminal
 4. **Feature verification**:
    - TreeSitter and default syntax highlighting
@@ -245,7 +245,7 @@ git commit -m "feat: your changes"
 5. **Push with tags**: `git push origin main --tags`
 6. **Create GitHub releases** with appropriate assets:
    - Neovim: Platform-agnostic JSON system features
-   - VS Code: Include `.vsix` file with all 3 variants
+   - VS Code: Include `.vsix` file with single optimized theme
 7. **Update documentation**: Ensure all docs reflect v2.0.0 features
 
 ### Plugin Manager Support
@@ -260,8 +260,34 @@ git commit -m "feat: your changes"
 - [x] Add VS Code theme (vscode/) - **Completed vscode-v1.0.1**
 - [x] TypeScript and JSX/TSX syntax highlighting support
 - [ ] Additional language-specific highlights (Go, Python, C++, etc.)
-- [ ] Consider light mode variant
+- [ ] Consider light mode theme
 - [ ] Incorporate community feedback
+
+## Migration Guide
+
+### From v1.x to v2.0.0+ (Theme Variants Removed)
+
+If you were using theme variants in VS Code:
+
+**Before (v1.x)**:
+- `Aardvark Blue` (default)
+- `Aardvark Blue High Contrast` 
+- `Aardvark Blue Minimal`
+
+**After (v2.0.0+)**:
+- `Aardvark Blue` (single optimized theme)
+
+**Action Required**:
+1. If using `High Contrast` or `Minimal` variants, switch to the main `Aardvark Blue` theme
+2. The new single theme incorporates the best aspects of all previous variants
+3. Update any documentation/tutorials referencing the removed variants
+
+**Directory Structure Changes**:
+- `extras/vscode/` moved to `vscode/` (affects development/build processes only)
+
+**Accessibility Improvements**:
+- JSX delimiter and comment colors updated to meet WCAG AA contrast guidelines (4.5:1 ratio)
+- All text colors now provide better readability for users with visual impairments
 
 ## Contribution Guide
 

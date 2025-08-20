@@ -139,6 +139,15 @@
         "entity.other.attribute-name.jsx"
       ]
     },
+    "jsx_delimiter": {
+      "description": "JSX tag brackets and delimiters",
+      "tokens": [
+        "punctuation.definition.tag.begin.tsx",
+        "punctuation.definition.tag.end.tsx",
+        "punctuation.definition.tag.begin.jsx",
+        "punctuation.definition.tag.end.jsx"
+      ]
+    },
     "comment": {
       "description": "Comments and documentation",
       "tokens": [

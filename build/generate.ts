@@ -825,6 +825,13 @@ function generateVSCodeTheme(variant: string = 'default'): string {
         settings: {
           foreground: resolveTokenColor('jsx_attribute', variant)
         }
+      },
+      {
+        name: "JSX Delimiters",
+        scope: vscodeTokens.token_groups.jsx_delimiter?.tokens || [],
+        settings: {
+          foreground: resolveTokenColor('jsx_delimiter', variant)
+        }
       }
     ]
   };

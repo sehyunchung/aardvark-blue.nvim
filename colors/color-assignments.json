@@ -61,6 +61,7 @@
     "jsx_element": "danger",
     "jsx_builtin": "structure",
     "jsx_attribute": "accent",
+    "jsx_delimiter": "muted",
     "comment": "muted",
     "constant": "danger"
   },
@@ -79,6 +80,7 @@
         "jsx_element": "danger",
         "jsx_builtin": "structure",
         "jsx_attribute": "warning",
+        "jsx_delimiter": "muted",
         "comment": "muted",
         "constant": "danger"
       }
@@ -96,6 +98,7 @@
         "jsx_element": "danger",
         "jsx_builtin": "structure",
         "jsx_attribute": "success",
+        "jsx_delimiter": "muted",
         "comment": "muted",
         "constant": "accent"
       }

@@ -830,7 +830,7 @@ function generateVSCodeTheme(): string {
 
 // Ensure output directories exist  
 const outputDir = path.join(__dirname, '../lua/aardvark-blue');
-const vscodeOutputDir = path.join(__dirname, '../extras/vscode/themes');
+const vscodeOutputDir = path.join(__dirname, '../vscode/themes');
 fs.mkdirSync(outputDir, { recursive: true });
 fs.mkdirSync(vscodeOutputDir, { recursive: true });
 
@@ -902,4 +902,4 @@ console.log('✓ Generated aardvark-blue-color-theme.json (default)');
 
 console.log('\\nGeneration complete! Files written to:');
 console.log('  - lua/aardvark-blue/ (Neovim)');
-console.log('  - extras/vscode/themes/ (VS Code)');
+console.log('  - vscode/themes/ (VS Code)');

@@ -28,14 +28,11 @@ aardvark-blue.nvim/
 │   └── config.lua                  # Configuration options
 ├── doc/
 │   └── aardvark-blue.txt           # Vim help documentation
-├── extras/
-│   └── vscode/                     # VS Code theme collection (vscode-v2.0.0)
-│       ├── themes/                 # Generated VS Code themes
-│       │   ├── aardvark-blue-color-theme.json          # Default variant
-│       │   ├── aardvark-blue-high_contrast-color-theme.json # High contrast
-│       │   └── aardvark-blue-minimal-color-theme.json  # Minimal variant
-│       ├── package.json            # VS Code extension manifest
-│       └── *.md                    # VS Code documentation
+├── vscode/                          # VS Code theme (vscode-v2.0.0)
+│   ├── themes/                      # Generated VS Code themes
+│   │   └── aardvark-blue-color-theme.json           # Main theme
+│   ├── package.json                 # VS Code extension manifest
+│   └── *.md                         # VS Code documentation
 ├── scripts/                        # Development automation (NEW v2.0.0)
 │   └── setup-git-hooks.sh         # Git hooks installer
 ├── .githooks/                      # Pre-commit validation (NEW v2.0.0)
@@ -151,7 +148,7 @@ The colorscheme leverages specific TreeSitter capture groups for precise syntax 
 
 ### 🚨 **IMPORTANT: Auto-Generated Files**
 
-**NEVER directly edit files in `lua/aardvark-blue/` or `extras/vscode/themes/`** - they are auto-generated and will be overwritten!
+**NEVER directly edit files in `lua/aardvark-blue/` or `vscode/themes/`** - they are auto-generated and will be overwritten!
 
 ### When Changing Colors
 
@@ -242,8 +239,8 @@ git commit -m "feat: your changes"
 **v2.0.0 Release Process:**
 
 1. **Validate and generate**: `npm run validate && npm run generate`
-2. **Update VS Code package**: Update `extras/vscode/package.json` version
-3. **Build VS Code extension**: `cd extras/vscode && npm run package`
+2. **Update VS Code package**: Update `vscode/package.json` version
+3. **Build VS Code extension**: `cd vscode && npm run package`
 4. **Create prefixed tags**: `git tag nvim-v2.0.0 && git tag vscode-v2.0.0`
 5. **Push with tags**: `git push origin main --tags`
 6. **Create GitHub releases** with appropriate assets:
@@ -260,7 +257,7 @@ git commit -m "feat: your changes"
 
 ## Future Plans
 
-- [x] Add VS Code theme (extras/vscode/) - **Completed vscode-v1.0.1**
+- [x] Add VS Code theme (vscode/) - **Completed vscode-v1.0.1**
 - [x] TypeScript and JSX/TSX syntax highlighting support
 - [ ] Additional language-specific highlights (Go, Python, C++, etc.)
 - [ ] Consider light mode variant

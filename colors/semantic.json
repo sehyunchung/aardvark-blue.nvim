@@ -56,7 +56,7 @@
     "component": "bright.red",
     "html_tag": "bright.cyan", 
     "attribute": "bright.yellow",
-    "delimiter": "ansi.white",
+    "delimiter": "ui.comment",
     "member_component": "bright.red"
   },
   

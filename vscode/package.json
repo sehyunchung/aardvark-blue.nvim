@@ -2,7 +2,7 @@
   "name": "aardvark-blue-theme",
   "displayName": "Aardvark Blue Theme",
   "description": "Professional dark theme inspired by Ghostty's Aardvark Blue terminal. Features comprehensive TypeScript/JSX support with semantic token highlighting and optimal readability.",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "publisher": "SehyunChung",
   "author": {
     "name": "Sehyun Chung",

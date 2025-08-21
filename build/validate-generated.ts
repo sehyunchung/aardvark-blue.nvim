@@ -121,7 +121,7 @@ function validateJSONFile(filePath: string): string[] {
 console.log('Validating generated files...\n');
 
 const luaOutputDir = path.join(__dirname, '../lua/aardvark-blue');
-const vscodeOutputDir = path.join(__dirname, '../extras/vscode/themes');
+const vscodeOutputDir = path.join(__dirname, '../vscode/themes');
 
 const luaFiles: FileCheck[] = [
   { path: path.join(luaOutputDir, 'palette.lua'), name: 'palette.lua', required: true },

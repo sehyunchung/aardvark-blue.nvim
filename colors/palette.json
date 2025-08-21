@@ -38,7 +38,7 @@
     "bg_light": "#1a3050", 
     "bg_darker": "#051020",
     "border": "#2a4060",
-    "comment": "#6a7a8a",
+    "comment": "#7a8a9a",
     "error": "#f05b50",
     "warning": "#ffe763",
     "info": "#60a4ec", 
@@ -46,7 +46,7 @@
     "fold": "#1a3050",
     "visual": "#bfdbfe",
     "search": "#ffe763",
-    "line_number": "#6a7a8a",
+    "line_number": "#7a8a9a",
     "cursor_line": "#1a3050"
   }
 }

@@ -119,10 +119,8 @@
       ]
     },
     "jsx_element": {
-      "description": "JSX/React components and elements",
+      "description": "JSX/React components",
       "tokens": [
-        "entity.name.tag.tsx",
-        "entity.name.tag.jsx",
         "support.class.component.tsx",
         "support.class.component.jsx"
       ]
@@ -130,8 +128,8 @@
     "jsx_builtin": {
       "description": "HTML elements in JSX",
       "tokens": [
-        "entity.name.tag.html.tsx",
-        "entity.name.tag.html.jsx"
+        "entity.name.tag.tsx",
+        "entity.name.tag.jsx"
       ]
     },
     "jsx_attribute": {
@@ -139,6 +137,15 @@
       "tokens": [
         "entity.other.attribute-name.tsx",
         "entity.other.attribute-name.jsx"
+      ]
+    },
+    "jsx_delimiter": {
+      "description": "JSX tag brackets and delimiters",
+      "tokens": [
+        "punctuation.definition.tag.begin.tsx",
+        "punctuation.definition.tag.end.tsx",
+        "punctuation.definition.tag.begin.jsx",
+        "punctuation.definition.tag.end.jsx"
       ]
     },
     "comment": {

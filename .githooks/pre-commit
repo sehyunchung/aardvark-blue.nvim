@@ -32,7 +32,7 @@ if [ -n "$json_files_staged" ]; then
     
     # Add generated files to the commit
     git add lua/aardvark-blue/*.lua
-    git add extras/vscode/themes/*.json
+    git add vscode/themes/*.json
     
     echo "✅ Generated files updated and added to commit"
 fi
